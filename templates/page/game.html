@@ -1,0 +1,73 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="side-bar-open not-visible-768" v-on:click="openSideBarMenu">
+        <img draggable="false" src="{% static 'images/side-bar-toggle.svg' %}" alt="">
+    </div>
+    <div class="side-bar not-visible-768 " v-bind:class="{ sideBarActive:side_bar_menu }"><!-- sideBarActive-->
+        <span class="side-bar-toggle " v-on:click="openSideBarMenu"><img draggable="false" src="{% static 'images/side-bar-toggle.svg' %}" alt=""></span>
+        <div class="side-bar-wrapper">
+            {% if not request.user.is_authenticated %}
+                <p class="side-bar-demo"><a href="">DEMO</a></p>
+            {% endif %}
+            <div class="side-bar-games">
+                <div id="btn_level_1" class="side-bar-game level-1 complexity_btn radio "
+                     v-bind:class="{ gameLevelActive : game_level==1, btnDisabled : result_image_modal  }"
+
+                     v-on:click="game_level=1"
+                     data-type="radio" data-puzle="150" data-level="1">
+                    <p class="side-bar-game-level"><span>LEVEL</span> <span>1</span> </p>
+                    <p class="side-bar-game-info">4x4 | 16 {% trans 'элементов' %}</p>
+                    <p class="side-bar-game-info">{{ level1.timer }} {% trans 'минуты на сбор' %}</p>
+                    <p class="side-bar-game-info">{{ level1.balance }}% {% trans 'в рейтинг' %}</p>
+                </div>
+                <div id="btn_level_2" class="side-bar-game level-2 complexity_btn radio"
+                     v-bind:class="{ gameLevelActive : game_level==2, btnDisabled : result_image_modal }"
+                     v-on:click="game_level=2"
+                     data-type="radio" data-puzle="120" data-level="2">
+                    <p class="side-bar-game-level"><span>LEVEL</span> <span>2</span> </p>
+                    <p class="side-bar-game-info">5x5 | 25 {% trans 'элементов' %}</p>
+                    <p class="side-bar-game-info">{{ level2.timer }} {% trans 'минуты на сбор' %}</p>
+                    <p class="side-bar-game-info">{{ level2.balance }}% {% trans 'в рейтинг' %}</p>
+                </div>
+                <div id="btn_level_3" class="side-bar-game level-3 complexity_btn radio"
+                     v-bind:class="{ gameLevelActive : game_level==3, btnDisabled : result_image_modal }"
+                     v-on:click="game_level=3"
+                     data-type="radio" data-puzle="100" data-level="3">
+                    <p class="side-bar-game-level"><span>LEVEL</span> <span>3</span> </p>
+                    <p class="side-bar-game-info">6x6 | 36 {% trans 'элементов' %}</p>
+                    <p class="side-bar-game-info">{{ level3.timer }} {% trans 'минут на сбор' %}</p>
+                    <p class="side-bar-game-info">{{ level3.balance }}% {% trans 'в рейтинг' %}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div style="z-index: 80" class="counter">
+            <div class="footer-timer">
+                <p id="id_timer">00:00</p></div>
+            <span style="display: inline-block;    width: 150px;    text-align: center;    cursor: pointer;" id="id_concide" onclick="concide()">{% trans 'СБРОС'%}</span>
+        </div>
+    <div id="game" class="game-main">
+        {#        <div id="result_img"></div>#}
+
+        <div id="puzzle-board" class="game-area" @click="mobile_menu = false ; mobile_menu_right = false ">
+            <div class="game-area-loader " v-bind:class="{ loaderActive : loaderActive }">
+                <div class="containerrr">
+                    <div class="box1"></div>
+                    <div class="box2"></div>
+                    <div class="box3"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{#    {% include 'footer.html' %}#}
+{% endblock %}
+{% block js %}
+    {{ block.super }}
+
+
+{% endblock %}
+

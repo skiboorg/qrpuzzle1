@@ -1,0 +1,243 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-04 10:55+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/basic.html:49 templates/basic.html:53 templates/basic.html:64
+#: templates/basic.html:74 templates/basic.html:102
+msgid "Вход"
+msgstr "登录"
+
+#: templates/basic.html:54 templates/basic.html:70 templates/basic.html:75
+msgid "Регистрация"
+msgstr "注册"
+
+#: templates/basic.html:57 templates/basic.html:78 templates/page/lk.html:82
+msgid "Почта"
+msgstr "邮件"
+
+#: templates/basic.html:61 templates/basic.html:86
+msgid "Пароль"
+msgstr "密码"
+
+#: templates/basic.html:82 templates/page/lk.html:86
+msgid "Ник"
+msgstr "缺口"
+
+#: templates/basic.html:90
+msgid "Пароль повтор"
+msgstr "密码重播"
+
+#: templates/basic.html:94
+msgid "Вы согласны с"
+msgstr "你同意吗"
+
+#: templates/basic.html:94
+msgid "политикой конфидициальности"
+msgstr "隐私政策"
+
+#: templates/header.html:16 templates/header.html:351 templates/page/lk.html:9
+msgid "Cтатистика"
+msgstr "游戏统计"
+
+#: templates/header.html:17 templates/header.html:51 templates/header.html:234
+#: templates/header.html:239
+msgid "Правила"
+msgstr "规则"
+
+#: templates/header.html:18 templates/header.html:68 templates/header.html:219
+#: templates/header.html:224
+msgid "О нас"
+msgstr "关于我们"
+
+#: templates/header.html:19
+msgid "Выбор уровня"
+msgstr "等级选择"
+
+#: templates/header.html:28
+msgid "Смена языка"
+msgstr "切换语言"
+
+#: templates/header.html:29
+msgid "Смена темы"
+msgstr "主题变更"
+
+#: templates/header.html:37
+msgid "Выбор игры"
+msgstr "游戏选择"
+
+#: templates/header.html:84
+msgid "Уровень игры"
+msgstr "游戏等级"
+
+#: templates/header.html:90 templates/header.html:98 templates/header.html:105
+#: templates/page/game.html:21 templates/page/game.html:30
+#: templates/page/game.html:39 templates/page/slider.html:21
+#: templates/page/slider.html:31 templates/page/slider.html:41
+msgid "элементов"
+msgstr "元素"
+
+#: templates/header.html:91 templates/header.html:99 templates/header.html:106
+#: templates/page/game.html:40
+msgid "минут на сбор"
+msgstr "分钟建立"
+
+#: templates/header.html:92 templates/header.html:100 templates/header.html:107
+#: templates/page/slider.html:23 templates/page/slider.html:33
+#: templates/page/slider.html:43
+msgid "на баланс"
+msgstr "平衡"
+
+#: templates/header.html:119
+msgid "Изменить язык"
+msgstr "改变语言"
+
+#: templates/header.html:148
+msgid "Изменить тему"
+msgstr "更换话题"
+
+#: templates/header.html:188
+msgid "Cтатистика игр"
+msgstr "游戏统计"
+
+#: templates/header.html:189 templates/header.html:370
+#: templates/page/lk.html:11 templates/page/lk.html:26
+msgid "Баланс"
+msgstr "平衡"
+
+#: templates/header.html:190 templates/header.html:371
+msgid "Настройки"
+msgstr "设定值"
+
+#: templates/header.html:191 templates/header.html:231
+#: templates/header.html:369 templates/page/lk.html:10
+msgid "Чат поддержки"
+msgstr "支持聊天"
+
+#: templates/header.html:192 templates/header.html:372
+#: templates/page/lk.html:13
+msgid "Выход"
+msgstr "输出量"
+
+#: templates/header.html:218
+msgid "Главная"
+msgstr "家"
+
+#: templates/header.html:231
+msgid "Документы"
+msgstr "文件资料"
+
+#: templates/header.html:247 templates/header.html:252
+msgid "Информация"
+msgstr "信息"
+
+#: templates/header.html:327
+msgid "Вход / Регистрация"
+msgstr "登录注册"
+
+#: templates/page/game.html:22 templates/page/game.html:31
+#: templates/page/slider.html:22 templates/page/slider.html:32
+#: templates/page/slider.html:42
+msgid "минуты на сбор"
+msgstr "分钟建立"
+
+#: templates/page/game.html:23 templates/page/game.html:32
+#: templates/page/game.html:41
+msgid "в рейтинг"
+msgstr "评分"
+
+#: templates/page/game.html:50 templates/page/slider.html:53
+msgid "СБРОС"
+msgstr "解决"
+
+#: templates/page/index.html:12
+msgid "Выберите"
+msgstr "选择"
+
+#: templates/page/lk.html:12
+msgid "Наcтройки"
+msgstr "设定值"
+
+#: templates/page/lk.html:22
+msgid "Дата"
+msgstr "日期"
+
+#: templates/page/lk.html:23
+msgid "Уровень"
+msgstr "水平"
+
+#: templates/page/lk.html:24
+msgid "Картинка"
+msgstr "图片"
+
+#: templates/page/lk.html:25
+msgid "Рейтинг"
+msgstr "评分"
+
+#: templates/page/lk.html:27
+msgid "Результат"
+msgstr "结果"
+
+#: templates/page/lk.html:69
+msgid "Отправить"
+msgstr "提交"
+
+#: templates/page/lk.html:90
+msgid "Возраст"
+msgstr "年龄"
+
+#: templates/page/lk.html:94
+msgid "Образование"
+msgstr "教育"
+
+#: templates/page/lk.html:98
+msgid "Расположение"
+msgstr "位置"
+
+#: templates/page/lk.html:102
+msgid "Пол"
+msgstr "地板"
+
+#: templates/page/lk.html:113
+msgid "Мужчина"
+msgstr "男人"
+
+#: templates/page/lk.html:114
+msgid "Женщина"
+msgstr "女人"
+
+#: templates/page/lk.html:118
+msgid "Аватар"
+msgstr "头像"
+
+#: templates/page/lk.html:129
+msgid "Обновить профиль"
+msgstr "更新个人信息"
+
+#, fuzzy
+#~| msgid "Рейтинг"
+#~ msgid "на рейтинг"
+#~ msgstr "评分"
+
+#~ msgid "Заработок онлайн"
+#~ msgstr "网上赚钱"
+
+#~ msgid "Темный"
+#~ msgstr "黑暗"
+
+#~ msgid "Светлый"
+#~ msgstr "浅色"

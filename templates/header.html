@@ -1,0 +1,380 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+<header class="header">
+    <div class="header-wrapper">
+        <div class="header-mobile-left visible-768" v-on:click="open_mobile_menu">
+            {% if not indexPage %}
+                <img src="{% static 'images/header-mobile-left.svg' %}" alt="">
+            {% endif %}
+            <div class="mobile-user-panel panel-left" v-bind:class="{ secondaryPanelActive: mobile_menu == true }"><!--notlogged user -->
+
+                <div class="mobile-user-panel-menu">
+                    <ul>
+                        <li class="header-user-menu-item"><span class="header-user-menu-link arrow-link" v-on:click="open_mobile_sub_menu('choose')">{% trans 'Cтатистика' %}</span></li>
+                        <li class="header-user-menu-item"><span class="header-user-menu-link arrow-link" v-on:click="open_mobile_sub_menu('rules')">{% trans 'Правила' %}</span></li>
+                        <li class="header-user-menu-item"><span class="header-user-menu-link arrow-link" v-on:click="open_mobile_sub_menu('about')">{% trans 'О нас' %}</span></li>
+                        <li class="header-user-menu-item"><span class="header-user-menu-link arrow-link" v-on:click="open_mobile_sub_menu('gameselect')">{% trans 'Выбор уровня' %}</span></li>
+                        <li class="header-user-menu-item"><span class="header-user-menu-link
+                        {% if LANGUAGE_CODE == 'en' %}
+                             lang-uk-link
+                        {% elif LANGUAGE_CODE == 'ru' %}
+                           lang-ru-link
+                        {% elif LANGUAGE_CODE == 'zh-hans' %}
+                           lang-ch-link
+                        {% endif %}"
+                                                                v-on:click="open_mobile_sub_menu('lang')">{% trans 'Смена языка' %}</span></li>
+                        <li class="header-user-menu-item"><span class="header-user-menu-link theme-link-l" v-on:click="open_mobile_sub_menu('theme')">{% trans 'Смена темы' %}</span></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="mobile-user-panel panel-left secondary-panel " v-bind:class="{ secondaryPanelActive: mobile_sub_menu == 'choose' }"><!--Game switch secondaryPanelActive-->
+                <div v-on:click="close_mobile_sub_menu" class="mobile-user-panel-header">
+                    <img src="{% static 'images/side-bar-toggle.svg' %}" alt="">
+                    <p>{% trans 'Выбор игры' %}</p>
+                </div>
+                <div class="mobile-user-panel-menu">
+                    <ul>
+                        <li class="header-user-menu-item"><span class="header-user-menu-link game-select-link" @click="game_type = 2">QR PUZZLE</span></li>
+                        <li class="header-user-menu-item"><span class="header-user-menu-link game-select-link" @click="game_type = 1">QART</span></li>
+                        {#                            <li class="header-user-menu-item"><span class="header-user-menu-link game-select-link" >Game 3</span></li>#}
+                    </ul>
+                </div>
+
+            </div>
+            <div class="mobile-user-panel panel-left secondary-panel " v-bind:class="{ secondaryPanelActive: mobile_sub_menu == 'rules' }"><!--Game rules -->
+                <div v-on:click="close_mobile_sub_menu" class="mobile-user-panel-header">
+                    <img src="{% static 'images/side-bar-toggle.svg' %}" alt="">
+                    <p>{% trans 'Правила' %}</p>
+                </div>
+                <div class="mobile-user-panel-menu">
+                    <div class="mobile-user-panel-text-wrapper">
+                        <p class="mobile-user-panel-text-header"></p>
+                        <p class="mobile-user-panel-text">
+                            {{ rulesText | safe}}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="mobile-user-panel panel-left secondary-panel " v-bind:class="{ secondaryPanelActive: mobile_sub_menu == 'about' }"><!--About us & Contacts -->
+                <div v-on:click="close_mobile_sub_menu" class="mobile-user-panel-header">
+                    <img src="{% static 'images/side-bar-toggle.svg' %}" alt="">
+                    <p>{% trans 'О нас' %}</p>
+                </div>
+                <div class="mobile-user-panel-menu">
+                    <div class="mobile-user-panel-text-wrapper">
+                        <p class="mobile-user-panel-text-header"></p>
+                        <p class="mobile-user-panel-text"></p>
+                      {{ aboutText | safe}}
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="mobile-user-panel panel-left secondary-panel " v-bind:class="{ secondaryPanelActive: mobile_sub_menu == 'gameselect' }"><!--Level switch -->
+                <div v-on:click="close_mobile_sub_menu" class="mobile-user-panel-header">
+                    <img src="{% static 'images/side-bar-toggle.svg' %}" alt="">
+                    <p>{% trans 'Уровень игры' %}</p>
+                </div>
+                <div class="mobile-user-panel-menu">
+                    <div class="mobile-user-panel-levels">
+                        <div class="mobile-user-panel-level-item level1 complexity_btn radio" data-type="radio" data-puzle="150" data-level="1">
+                            <p class="mobile-user-panel-level-item-number">1</p>
+                            <p class="mobile-user-panel-level-item-text">4x4 | 16 {% trans 'элементов' %} <br>
+                                {{ level1.timer }} {% trans 'минут на сбор' %}<br>
+                                {{ level1.balance }}% {% trans 'на баланс' %}</p>
+
+
+                        </div>
+                        <div class="mobile-user-panel-level-item level2 complexity_btn radio" data-type="radio" data-puzle="120" data-level="2">
+                            <p class="mobile-user-panel-level-item-number">2</p>
+                            <p class="mobile-user-panel-level-item-text">5x5 | 25 {% trans 'элементов' %}<br>
+                                {{ level2.timer }} {% trans 'минут на сбор' %}<br>
+                                {{ level2.balance }}% {% trans 'на баланс' %}</p>
+
+                        </div>
+                        <div class="mobile-user-panel-level-item level3 complexity_btn radio" data-type="radio" data-puzle="100" data-level="3">
+                            <p class="mobile-user-panel-level-item-number">3</p>
+                            <p class="mobile-user-panel-level-item-text">6x6 | 36 {% trans 'элементов' %}<br>
+                                {{ level3.timer }} {% trans 'минут на сбор' %}<br>
+                                {{ level3.balance }}% {% trans 'на баланс' %}</p>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="mobile-user-panel panel-left secondary-panel " v-bind:class="{ secondaryPanelActive: mobile_sub_menu == 'lang' }"><!--Language switch secondaryPanelActive-->
+                <div v-on:click="close_mobile_sub_menu" class="mobile-user-panel-header">
+                    <img src="{% static 'images/side-bar-toggle.svg' %}" alt="">
+                    <p>{% trans 'Изменить язык' %}h</p>
+                </div>
+                <div class="mobile-user-panel-menu">
+                    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                        <ul>
+
+                            {% for language in languages %}
+                                <li class="header-sub-menu-item ">
+                                    <label  class="lang-select-label {% if language.code == LANGUAGE_CODE %}lang-select-label-selected{% endif %}" for="lang_{{ language.code }}">
+                                        <input class="lang-select-input" id="lang_{{ language.code }}" type="radio" name="language" value="{{ language.code }}" onchange="this.form.submit()">
+                                        {% if language.code == 'en' %}
+                                                <img src=" {% static 'images/lang-uk-icon.svg' %}" alt="">
+                                            {% elif language.code == 'ru' %}
+                                                <img src="{% static 'images/lang-ru-icon.svg' %}" alt="">
+                                            {% elif language.code == 'zh-hans' %}
+                                                <img src="{% static 'images/lang-ch-icon.svg' %}" alt="">
+                                            {% endif %}
+                                    </label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        </ul>
+                    </form>
+                </div>
+
+            </div>
+            <div class="mobile-user-panel panel-left secondary-panel " v-bind:class="{ secondaryPanelActive: mobile_sub_menu == 'theme' }"><!--Theme switch secondaryPanelActive-->
+                <div v-on:click="close_mobile_sub_menu" class="mobile-user-panel-header">
+                    <img src="{% static 'images/side-bar-toggle.svg' %}" alt="">
+                    <p>{% trans 'Изменить тему' %}h</p>
+                </div>
+                <div class="mobile-user-panel-menu">
+                    <ul>
+                        <li class="header-user-menu-item"><a class="header-user-menu-link theme-link-l" href="">LIGHT</a></li>
+                        <li class="header-user-menu-item"><a class="header-user-menu-link theme-link-d" href="">DARK</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="header-logo">
+            <a href="{% url 'index' %}">
+                <img :src="[[main_logo]]" alt="">
+            </a>
+
+        </div>
+        {% if request.user.is_authenticated %}
+            <div class="header-mobile-right visible-768" v-on:click="open_mobile_menu_right">
+        {% else %}
+            <div class="header-mobile-right visible-768" v-on:click="openRegModal">
+        {% endif %}
+        <img src="{% static 'images/header-mobile-right.svg' %}" alt="">
+        <div class="mobile-user-panel panel-right" v-bind:class="{ secondaryPanelActiveRight: mobile_menu_right == true }"><!--notlogged user -->
+            {% if request.user.is_authenticated %}
+                <div class="mobile-user-panel-info">
+                    <div class="mobile-user-panel-name">
+                        <p class="mobile-user-panel-username">{{ request.user.nickname }}</p>
+                        <p class="mobile-user-panel-balance">{{ request.user.balance }}</p>
+                    </div>
+                    <div class="mobile-user-panel-avatar">
+                        <img style="width: 60px;height: 60px;" src="{{ request.user.get_user_avatar }}" alt="">
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="mobile-user-panel-menu">
+                <ul>
+                    <li class="header-user-menu-item"><a class="header-user-menu-link arrow-link" href="{% url 'lk' %}?tab=games">{% trans 'Cтатистика игр' %}</a></li>
+                    <li class="header-user-menu-item"><a class="header-user-menu-link arrow-link" href="{% url 'lk' %}?tab=cash">{% trans 'Баланс' %}</a></li>
+                    <li class="header-user-menu-item"><a class="header-user-menu-link arrow-link" href="{% url 'lk' %}?tab=settings">{% trans 'Настройки' %}</a></li>
+                    <li class="header-user-menu-item"><a class="header-user-menu-link arrow-link" href="{% url 'lk' %}?tab=support">{% trans 'Чат поддержки' %}</a></li>
+                    <li class="header-user-menu-item"><a class="header-user-menu-link arrow-link" href="{% url 'logout_page' %}?tab=support">{% trans 'Выход' %}</a></li>
+                </ul>
+            </div>
+
+            {#                    <div class="mobile-user-panel-button">#}
+            {#                        <span  v-on:click="openRegModal" class="btn btn-blue btn-center">LOG IN / SIGN UP</span>#}
+            {#                    </div>#}
+
+        </div>
+
+
+        </div>
+        <div class="header-nav not-visible-768">
+            <ul class="header-nav-wrapper">
+                {#                    <li class="header-nav-item has-sub-menu"><span v-on:click="openHeaderSubMenu('game')">GAME</span>#}
+                {#                        <div class="header-sub-menu "#}
+                {#                             v-bind:class="{ subMenuActive: header_sub_menu == 'game' }"#}
+                {#                             v-on:mouseleave="openHeaderSubMenu('game')"><!-- subMenuActive-->#}
+                {#                            <ul class="header-sub-menu-wrapper">#}
+                {##}
+                {#                                <li class="header-sub-menu-item"><span class="header-sub-menu-link" @click="game_type = 2">QR Puzzle</span></li>#}
+                {#                                <li class="header-sub-menu-item"><span class="header-sub-menu-link" @click="game_type = 1">QArt</span></li>#}
+                {#                                <li class="header-sub-menu-item"><span class="header-sub-menu-link" @click="game_type = 3">GAME 3</span></li>#}
+                {#                            </ul>#}
+                {#                        </div>#}
+                {#                    </li>#}
+                <li class="header-nav-item"><a href="{% url 'index' %}">{% trans 'Главная' %}</a>
+                 <li class="header-nav-item has-sub-text"><span v-on:click="openHeaderSubText('about')">{% trans 'О нас' %}</span>
+                    <div class="header-nav-sub-text "
+                         v-bind:class="{ headerNavSubTextActive: header_sub_text == 'about' }"
+                         v-on:mouseleave="openHeaderSubText('about')"><!-- headerNavSubTextActive-->
+                        <div style="height: 380px; overflow-y: auto;margin-bottom: 40px">
+                            <h3 class="header-nav-sub-text-header header-about">{% trans 'О нас' %}</h3>
+                            <p class="header-nav-sub-text-title"></p>
+                            <p class="header-nav-sub-text-info"></p>
+
+                            {{ aboutText | safe}}
+
+                        </div>
+                        <div class="header-nav-sub-text-buttons"><a target="_blank" style="width: 150px;" href="https://ec.europa.eu/programmes/horizon2020/what-horizon-2020" class="btn btn-blue">{% trans 'Документы' %}</a><a target="_blank" style="width: 150px;" href="{% url 'lk' %}?tab=support" class="btn btn-orange">{% trans 'Чат поддержки' %}</a></div>
+                    </div>
+                </li>
+                <li class="header-nav-item has-sub-text"><span v-on:click="openHeaderSubText('rules')">{% trans 'Правила' %}</span>
+                    <div class="header-nav-sub-text "
+                         v-bind:class="{ headerNavSubTextActive: header_sub_text == 'rules' }"
+                         v-on:mouseleave="openHeaderSubText('rules')"><!-- headerNavSubTextActive-->
+                        <div style="height: 380px; overflow-y: auto; margin-bottom: 40px;">
+                            <h3 class="header-nav-sub-text-header header-about">{% trans 'Правила' %}</h3>
+                            <p class="header-nav-sub-text-title"></p>
+                            {{ rulesText | safe}}
+
+                        </div>
+                        {#                            <div class="header-nav-sub-text-buttons"><span class="btn btn-blue">DOCUMENTS</span><span class="btn btn-orange">SUPPORT</span></div>#}
+                    </div>
+                </li>
+                   <li class="header-nav-item has-sub-text"><span v-on:click="openHeaderSubText('info')">{% trans 'Информация' %}</span>
+                    <div class="header-nav-sub-text "
+                         v-bind:class="{ headerNavSubTextActive: header_sub_text == 'info' }"
+                         v-on:mouseleave="openHeaderSubText('info')"><!-- headerNavSubTextActive-->
+                        <div style="height: 380px; overflow-y: auto;margin-bottom: 40px">
+                            <h3 class="header-nav-sub-text-header header-about">{% trans 'Информация' %}</h3>
+                            <p class="header-nav-sub-text-title"></p>
+                            <p class="header-nav-sub-text-info"></p>
+
+                            {{ infoText | safe}}
+
+                        </div>
+                     </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="header-buttons not-visible-768">
+            <ul class="header-nav-wrapper">
+                <!--&lt;!&ndash;not-visible-1320 &ndash;&gt;  -->
+                <li class="header-nav-item-button has-sub-menu lang-button">
+                <span v-on:click="openHeaderSubMenu('settings')">
+                    <img
+                            {% if request.session.theme  == 'light' %}
+                            src="{% static 'images/theme-icon-l.svg' %}"
+
+                            {% else %}
+                              src="{% static 'images/theme-icon.svg' %}"
+                            {% endif %}
+                            alt=""> <img src="{% static 'images/arrow_down.svg' %}" alt="">
+                </span>
+                    <div v-bind:class="{ subMenuActive: header_sub_menu == 'settings' }" class="header-sub-menu  button-sub-menu lang-button">
+                        <ul class="header-sub-menu-wrapper">
+                            <li class="header-sub-menu-item iconMenu"><a class="header-sub-menu-item-lang " href="{% url 'theme_dark' %}"><img src="{% static 'images/theme-icon.svg' %}" alt=""></a></li>
+                            <li class="header-sub-menu-item iconMenu"><a class="header-sub-menu-item-lang " href="{% url 'theme_light' %}"><img src="{% static 'images/theme-icon-l.svg' %}" alt=""></a></li>
+                        </ul>
+                    </div>
+                </li>
+                {#            &lt;!&ndash;not-visible-1500 &ndash;&gt;-->#}
+                <li class="header-nav-item-button has-sub-menu lang-button">
+                <span v-on:click="openHeaderSubMenu('lang')">
+                     {% if LANGUAGE_CODE == 'en' %}
+                        <img src=" {% static 'images/lang-uk-icon.svg' %}" alt="">
+                    {% elif LANGUAGE_CODE == 'ru' %}
+                        <img src="{% static 'images/lang-ru-icon.svg' %}" alt="">
+                    {% elif LANGUAGE_CODE == 'zh-hans' %}
+                        <img src="{% static 'images/lang-ch-icon.svg' %}" alt="">
+                    {% endif %}
+
+                    <img src="{% static 'images/arrow_down.svg' %}" alt="">
+                </span>
+                    <div v-bind:class="{ subMenuActive: header_sub_menu == 'lang' }" class="header-sub-menu  button-sub-menu lang-button">
+                        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                            <ul>
+
+                                {% for language in languages %}
+                                    <li class="header-sub-menu-item iconMenu">
+                                        <label  class="lang-select-label
+                                            {% if language.code == LANGUAGE_CODE %}lang-select-label-selected{% endif %}"
+                                                for="lang_{{ language.code }}">
+                                            <input class="lang-select-input" id="lang_{{ language.code }}" type="radio" name="language" value="{{ language.code }}" onchange="this.form.submit()">
+                                            {% if language.code == 'en' %}
+                                                <img src=" {% static 'images/lang-uk-icon.svg' %}" alt="">
+                                            {% elif language.code == 'ru' %}
+                                                <img src="{% static 'images/lang-ru-icon.svg' %}" alt="">
+                                            {% elif language.code == 'zh-hans' %}
+                                                <img src="{% static 'images/lang-ch-icon.svg' %}" alt="">
+                                            {% endif %}
+                                        </label>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                        </form>
+                    </div>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="header-nav-item-button not-visible-1024"><span><img src="{% static 'images/wallet-icon.svg' %}" alt=""> {{ request.user.balance }} QR </span></li>
+                {% endif %}
+                {% if not request.user.is_authenticated %}
+                    <li class="header-nav-item-button"><span style="height: 57px" class="btn btn-blue" v-on:click="openRegModal">{% trans 'Вход / Регистрация' %}</span></li>
+                    {#                <li class="header-nav-item-toggle">#}
+                    {#                    <div class="header-user-toggle"><img src="{% static 'images/user-menu-icon.svg' %}" alt=""> </div>#}
+                    {#                </li>#}
+                {% endif %}
+
+            </ul>
+        </div>
+        {% if request.user.is_authenticated %}
+
+            <div  class="header-user not-visible-768">
+                <div class="header-user-wrapper">
+                    <div class="header-user-info">
+                        <p class="header-user-info-name">{{ request.user.nickname }}</p>
+                        <p  class="header-user-info-rating">Rating: <span id="rating_desktop">{{ request.user.rating }}</span></p>
+                    </div>
+                    <div class="header-user-avatar" v-on:click="openUserMenu"><img width="60" height="60" src="{{ request.user.get_user_avatar }}" alt=""></div>
+
+                </div>
+                <div class="header-user-menu " v-bind:class="{ headerUserMenuActive:desktop_user_menu }" v-on:mouseleave="closeUserMenu"><!-- headerUserMenuActive-->
+                    <ul class="header-user-menu-wrapper">
+                        <!--<li class="header-user-menu-item visible-1024"><a class="header-user-menu-link " href="">78 150.10 QR</a></li>-->
+                        <!--<li class="header-user-menu-item visible-1320"><a class="header-user-menu-link " href="">THEME SELECT</a></li>-->
+                        <!--<li class="header-user-menu-item visible-1500"><a class="header-user-menu-link " href="">LANG SELECT</a></li>-->
+                        <li class="header-user-menu-item"><a class="header-user-menu-link link-games" href="{% url 'lk' %}?tab=games">{% trans 'Cтатистика' %}</a></li>
+                        {#                        <li class="header-user-menu-item has-dropdown " v-bind:class="{ dropDownActive:drop_down_menu == 'lang' }"> <!-- dropDownActive-->#}
+                        {#                            <span class="header-user-menu-link lang-ru-link" v-on:click="openDropDown('lang')">Language</span>#}
+                        {#                            <ul class="header-user-menu-dropdown ">#}
+                        {#                                <form class="header-sub-menu-wrapper">#}
+                        {#                                    <label class="header-user-menu-link lang-uk-link header-user-menu-dropdown-item"><input type="radio" name="l">ENGLISH</label>#}
+                        {#                                    <label class="header-user-menu-link lang-ch-link header-user-menu-dropdown-item"><input type="radio" name="l">CHINESE</label>#}
+                        {#                                    <label class="header-user-menu-link lang-ru-link header-user-menu-dropdown-item"><input type="radio" name="l">RUSSIAN</label>#}
+                        {#                                </form>#}
+                        {#                            </ul>#}
+                        {#                        </li>#}
+                        {#                        <li class="header-user-menu-item has-dropdown " v-bind:class="{ dropDownActive:drop_down_menu == 'theme' }"> <!-- dropDownActive-->#}
+                        {#                            <span class="header-user-menu-link theme-link-d" v-on:click="openDropDown('theme')">Theme</span>#}
+                        {#                            <ul class="header-user-menu-dropdown ">#}
+                        {#                                 <li class="header-user-menu-item"><a class="header-user-menu-link theme-link-l" href="">LIGHT</a></li>#}
+                        {#                                <li class="header-user-menu-item"><a class="header-user-menu-link theme-link-d" href="">DARK</a></li>#}
+                        {#                            </ul>#}
+                        {#                        </li>#}
+                        <li class="header-user-menu-item"><a class="header-user-menu-link link-support" href="{% url 'lk' %}?tab=support">{% trans 'Чат поддержки' %}</a></li>
+                        <li class="header-user-menu-item"><a class="header-user-menu-link link-cash" href="{% url 'lk' %}?tab=cash">{% trans 'Баланс' %}</a></li>
+                        <li class="header-user-menu-item"><a class="header-user-menu-link link-settings" href="{% url 'lk' %}?tab=settings">{% trans 'Настройки' %}</a></li>
+                        <li class="header-user-menu-item"><a class="header-user-menu-link link-logout" href="{%  url 'logout_page' %}">{% trans 'Выход' %}</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+
+        </div>
+</header>

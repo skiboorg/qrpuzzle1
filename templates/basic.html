@@ -1,0 +1,456 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>QR Puzzle</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+    {% if request.session.theme  == 'light' %}
+    <link rel="stylesheet" href="{% static 'css/main1.css' %}">
+        <link rel="stylesheet" href="{% static 'css/add.css' %}">
+   {% else %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/add.css' %}">
+     {% endif %}
+    <style>
+        .btnDisabled{
+            opacity: 0.5;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        .header-nav-sub-text p{
+            text-transform: initial;
+        }
+        .toggleButton p{
+             text-transform: initial;
+        }
+        .header-nav-sub-text a{
+            text-decoration: underline ;
+            font-weight: bold;
+            font-size: 16px ;
+        }
+    </style>
+</head>
+<body >
+<div id="app" class="app">
+    {% csrf_token %}
+    {% include 'header.html' %}
+    {% block content %}
+    {% endblock %}
+<div  class="modal " v-bind:class="{ modalActive:reg_modal }">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="close"  v-on:click="openRegModal"><img src="{% static 'images/close-btn.svg' %}" alt=""></div>
+            <div v-if="modal_login_body" >
+                <div class="modal-header">
+                    <p>{% trans 'Вход' %}</p>
+                </div>
+                <div class="modal-body">
+                    <div class="toggleButton">
+                        <p   v-bind:class="{ toggleButtonActiveLeft: modal_login_body }">{% trans 'Вход' %}</p>
+                        <p  v-on:click="modal_login_body=false">{% trans 'Регистрация' %}</p>
+                    </div>
+                    <div class="form-row">
+                        <label>{% trans 'Почта' %}:</label>
+                        <input type="text" v-model="login_email">
+                    </div>
+                    <div class="form-row mb-40">
+                        <label>{% trans 'Пароль' %}:</label>
+                        <input type="password" v-model="login_password">
+                    </div>
+                    <span @click="sendLogin" class="btn btn-blue btn-center" :class="{btnDisabled : !login_email || !login_password}">{% trans 'Вход' %}</span>
+
+                </div>
+            </div>
+            <div v-else>
+                <div class="modal-header">
+                    <p>{% trans 'Регистрация' %}</p>
+                </div>
+                <div class="modal-body">
+                    <div class="toggleButton">
+                        <p  v-on:click="modal_login_body=true">{% trans 'Вход' %}</p>
+                        <p  v-bind:class="{ toggleButtonActiveRight: !modal_login_body }">{% trans 'Регистрация' %}</p>
+                    </div>
+                    <div class="form-row">
+                        <label>{% trans 'Почта' %}:</label>
+                        <input type="text" v-model="email">
+                    </div>
+                    <div class="form-row">
+                        <label>{% trans 'Ник' %}:</label>
+                        <input type="text" v-model="nickname">
+                    </div>
+                    <div class="form-row ">
+                        <label>{% trans 'Пароль' %}:</label>
+                        <input type="password" v-model="password1">
+                    </div>
+                    <div class="form-row ">
+                        <label>{% trans 'Пароль повтор' %}:</label>
+                        <input type="password" v-model="password2">
+                    </div>
+                    <div class="form-row mb-40">
+                        <label>{% trans 'Вы согласны с' %} <a style="text-decoration: underline" href="{% static 'policy.docx' %}">{% trans 'политикой конфидициальности' %}</a> ?</label>
+                        <input type="checkbox" v-model="is_login_agree">
+                    </div>
+
+                    <span class="btn btn-blue btn-center"
+                          @click="sendSignUp"
+                          :class="{btnDisabled : !email || !nickname ||  !password1 || !password2|| !is_login_agree}"
+
+                    >{% trans 'Вход' %}</span>
+                    <div class="">[[reg_error]]</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div  class="modal " v-bind:class="{ modalActive:result_image_modal }">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="close"  v-on:click="result_image_modal = false, mobile_sub_menu = 'gameselect'"><img src="{% static 'images/close-btn.svg' %}" alt=""></div>
+                <div class="modal-header">
+                    <p :class="{colorRed : !result}">[[result_title]]</p>
+                </div>
+                <div class="modal-body">
+                    <img :src=[[result_image]] alt="">
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+{% block js %}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/puzzle.js' %}"></script>
+
+    <script>
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data: {
+                slider_type:'',
+                btnOff:true,
+                result_title:'',
+                loaderActive:false,
+                mobile_menu_right: false,
+                  main_logo: '{% static 'images/qrlevel-white.png' %}',
+                result_image_modal:false,
+                result_image:'',
+                game_level:0,
+                game_type:2,
+                current_game_id:0,
+                mobile_menu : false,
+                mobile_sub_menu : '',
+                desktop_user_menu :false,
+                header_sub_text: '',
+                header_sub_menu: '',
+                side_bar_menu: true,
+                drop_down_menu: '',
+                reg_modal: false,
+                modal_login_body: true,
+                email:'{{ request.user.email }}',
+                nickname:'{{ request.user.nickname }}',
+                age:'{{ request.user.age }}',
+                education:'{{ request.user.study }}',
+                sex:'{{ request.user.sex }}',
+                location:'{{ request.user.region }}',
+                user_avatar:'{{ request.user.get_user_avatar }}',
+                avatar:null,
+                is_login_agree:'',
+                password1:'',
+                password2:'',
+                login_email:'',
+                login_password:'',
+                lk_tab: 'games',
+                chat_messages:[],
+                new_msg:'',
+                reg_error:'',
+                deposit_summ:0,
+                result:false
+
+            },
+            mounted: function () {
+                this.$nextTick(function () {
+                    {% if not indexPage %}
+                    this.mobile_sub_menu = 'gameselect'
+                    {% endif %}
+                    let uri = window.location.href.split('?');
+
+                    if (uri.length == 1 && uri[0].split('/').includes('slider')){
+
+                         this.main_logo = '{% static 'images/slider_puzzle_logo.png' %}'
+
+
+                    }
+
+                    if (uri.length == 2)
+                    {
+                        let vars = uri[1].split('&');
+                        let getVars = {};
+                        let tmp = '';
+                        vars.forEach(function(v){
+                            tmp = v.split('=');
+                            if(tmp.length == 2)
+                                getVars[tmp[0]] = tmp[1];
+                        });
+                        console.log(getVars);
+                        if ('tab' in getVars){
+                            console.log(getVars['tab'])
+                            this.lk_tab=getVars['tab']
+                        }
+                        if ('game' in getVars){
+                            console.log(getVars['game'])
+                            if(getVars['game'] === 'qrpuzzle' ){
+                                console.log('ttt')
+                                this.game_type = 2
+                            }
+                            if(getVars['game'] === 'qart' ){this.game_type = 1}
+
+                        }
+
+                    }
+                })
+            },
+            watch: {
+                lk_tab: function (val) {
+                    console.log(val)
+                    window.history.replaceState('','',`?tab=${val}`);
+                    if (val==='support'){
+                        this.getChats()
+                    }
+                },
+                game_type:function (val) {
+                    console.log(val)
+                    concide()
+
+                if (val === 2){
+                        console.log('2222')
+                        this.main_logo = '{% static 'images/qa_black_logo.png' %}'
+                        document.title = 'QR Puzzle'
+                    }
+                    if (val === 1){
+                        this.main_logo = '{% static 'images/qa_i.png' %}'
+                        document.title = 'QArt'
+                    }
+
+
+
+                }
+
+            },
+            computed: {
+
+            },
+            methods: {
+                start_slider: function(p,t,l) {
+
+                    slider(p,t,l)
+                }
+                ,
+                open_mobile_menu: function (event) {
+                    if(this.mobile_menu ){
+                        this.mobile_menu = false
+                    }else (
+                        this.mobile_menu = true
+                    )
+                },
+                open_mobile_menu_right: function (event) {
+                    if(this.mobile_menu_right ){
+                        this.mobile_menu_right = false
+                    }else (
+                        this.mobile_menu_right = true
+                    )
+                },
+                open_mobile_sub_menu: function (event) {
+                    this.mobile_sub_menu = event
+                },
+                close_mobile_sub_menu: function (event) {
+                    this.mobile_sub_menu = ''
+                },
+                openUserMenu: function () {
+                    if(this.desktop_user_menu ){
+                        this.desktop_user_menu = false
+                    }else {
+                        this.desktop_user_menu = true
+                        this.header_sub_menu = event
+                        this.header_sub_text = ''
+                    }
+                },
+                closeUserMenu: function () {
+                    this.desktop_user_menu = false
+                },
+                openHeaderSubText:function (event) {
+                    if(this.header_sub_text === event ){
+                        this.header_sub_text = ''
+                    }else {
+                        this.header_sub_text = event
+                        this.header_sub_menu = ''
+                        this.desktop_user_menu = false
+                    }
+                },
+                openHeaderSubMenu:function (event) {
+                    if (this.header_sub_menu === event) {
+                        this.header_sub_menu = ''
+                    } else {
+
+                        this.header_sub_menu = event
+                        this.header_sub_text = ''
+                        this.desktop_user_menu = false
+                    }
+                },
+                openSideBarMenu: function () {
+                    console.log(this.side_bar_menu)
+                    if(this.side_bar_menu ){
+                        this.side_bar_menu = false
+                    }else {
+                        this.side_bar_menu = true
+                    }
+                },
+                openDropDown:function (event) {
+                    if (this.drop_down_menu === event) {
+                        this.drop_down_menu = ''
+                    } else {
+                        this.drop_down_menu = event
+                    }
+                },
+                openRegModal: function () {
+                    if (this.reg_modal) {
+                        this.reg_modal = false
+                    } else {
+                        this.reg_modal = true
+                    }
+                },
+                sendSignUp: function () {
+                    console.log(this.name,this.email,this.password1,this.password2)
+                    this.reg_error=''
+                    let body = {
+                        'email':this.email,
+                        'nickname':this.nickname,
+                        'password1':this.password1,
+                        'password2':this.password2}
+
+                    fetch('{% url 'register' %}', {
+                        method: 'post',
+                        body: JSON.stringify(body),
+                        headers: { "X-CSRFToken": '{{  csrf_token }}' },
+                        credentials: 'same-origin'
+                    }).then(res=>res.json())
+                        .then(res => {
+
+                            console.log(res)
+                            if(res['status']==='success'){
+                                window.location.reload()
+                            }else{
+                                if(res['errors']['email']){
+                                    this.reg_error = this.reg_error + res['errors']['email'] + ' '
+                                }
+                                if(res['errors']['password2']){
+                                    this.reg_error = this.reg_error + res['errors']['password2'] + ' '
+                                }
+
+                            }
+                        })
+                },
+                sendLogin: function () {
+                    let body = {'email':this.login_email,
+                        'password':this.login_password}
+
+                    fetch('{% url 'login_req' %}', {
+                        method: 'post',
+                        body: JSON.stringify(body),
+                        headers: { "X-CSRFToken": '{{  csrf_token }}' },
+                        credentials: 'same-origin'
+                    }).then(res=>res.json())
+                        .then(res => {
+
+                            console.log(res)
+                            if(res['status']==='success'){
+                                window.location.reload()
+                            }
+
+                        })
+                },
+                getChats: function () {
+
+                    let body = {}
+                    fetch('{% url 'get_chats' %}', {
+                        method: 'post',
+                        body: JSON.stringify(body),
+                        headers: { "X-CSRFToken": '{{  csrf_token }}' },
+                        credentials: 'same-origin'
+                    }).then(res=>res.json())
+                        .then(res => {
+
+                            console.log(res)
+                            if (res.length >0 ){
+                                this.chat_messages=[]
+                                for (x of res){
+                                    console.log(x)
+                                    this.chat_messages.push(x)
+                                }
+
+                            }
+
+                        }).then(()=> {
+                        let msgDiv = document.getElementsByClassName('lk-support-messages')[0]
+                        msgDiv.scrollTo(0,(msgDiv.scrollTop+2000))
+
+
+                    })
+                },
+                newMsg: function () {
+                    if (this.new_msg ===''){
+                        return
+                    }
+                    console.log('send new msg')
+                    let body = {'text':this.new_msg}
+                    fetch('{% url 'new_msg' %}', {
+                        method: 'post',
+                        body: JSON.stringify(body),
+                        headers: { "X-CSRFToken": '{{  csrf_token }}' },
+                        credentials: 'same-origin'
+                    }).then(res=>res.json())
+                        .then(res => {
+                            console.log(res)
+                            this.new_msg =''
+                            this.getChats()
+                        })
+                },
+                newDeposit: function () {
+
+                    console.log('send new msg')
+                    let body = {'summ':this.deposit_summ}
+                    fetch('{% url 'new_deposit' %}', {
+                        method: 'post',
+                        body: JSON.stringify(body),
+                        headers: { "X-CSRFToken": '{{  csrf_token }}' },
+                        credentials: 'same-origin'
+                    }).then(res=>res.json())
+                        .then(res => {
+                            console.log(res)
+                            window.location.reload()
+                        })
+                },
+                changeAvatar(e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                   // this.avatar(files[0]);
+                    this.user_avatar = window.URL.createObjectURL(e.target.files[0])
+                    console.log(files[0])
+                    this.avatar = e.target.files[0]
+                    console.log(this.avatar)
+                },
+            }
+        })
+
+    </script>
+{% endblock %}
+</body>
+</html>
