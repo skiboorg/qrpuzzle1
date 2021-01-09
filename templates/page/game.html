@@ -20,7 +20,7 @@
                     <p class="side-bar-game-level"><span>LEVEL</span> <span>1</span> </p>
                     <p class="side-bar-game-info">4x4 | 16 {% trans 'элементов' %}</p>
                     <p class="side-bar-game-info">{{ level1.timer }} {% trans 'минуты на сбор' %}</p>
-                    <p class="side-bar-game-info">{{ level1.balance }}% {% trans 'в рейтинг' %}</p>
+                    <p class="side-bar-game-info">+{{ level1.balance }} {% trans 'в рейтинг' %}</p>
                 </div>
                 <div id="btn_level_2" class="side-bar-game level-2 complexity_btn radio"
                      v-bind:class="{ gameLevelActive : game_level==2, btnDisabled : result_image_modal }"
@@ -29,7 +29,7 @@
                     <p class="side-bar-game-level"><span>LEVEL</span> <span>2</span> </p>
                     <p class="side-bar-game-info">5x5 | 25 {% trans 'элементов' %}</p>
                     <p class="side-bar-game-info">{{ level2.timer }} {% trans 'минуты на сбор' %}</p>
-                    <p class="side-bar-game-info">{{ level2.balance }}% {% trans 'в рейтинг' %}</p>
+                    <p class="side-bar-game-info">+{{ level2.balance }} {% trans 'в рейтинг' %}</p>
                 </div>
                 <div id="btn_level_3" class="side-bar-game level-3 complexity_btn radio"
                      v-bind:class="{ gameLevelActive : game_level==3, btnDisabled : result_image_modal }"
@@ -38,7 +38,7 @@
                     <p class="side-bar-game-level"><span>LEVEL</span> <span>3</span> </p>
                     <p class="side-bar-game-info">6x6 | 36 {% trans 'элементов' %}</p>
                     <p class="side-bar-game-info">{{ level3.timer }} {% trans 'минут на сбор' %}</p>
-                    <p class="side-bar-game-info">{{ level3.balance }}% {% trans 'в рейтинг' %}</p>
+                    <p class="side-bar-game-info">+{{ level3.balance }} {% trans 'в рейтинг' %}</p>
                 </div>
             </div>
 
