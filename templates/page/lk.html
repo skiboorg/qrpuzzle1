@@ -11,6 +11,10 @@
                     <li class="lk-tab-link tab-link-cash" :class="{ lkTabLinkActive:lk_tab == 'cash' }" @click="lk_tab = 'cash' ">{% trans 'Баланс' %}</li>
                     <li class="lk-tab-link tab-link-settings" :class="{ lkTabLinkActive:lk_tab == 'settings' }" @click="lk_tab = 'settings' ">{% trans 'Наcтройки' %}</li>
                     <li class="lk-tab-link tab-link-logout"><a href="{% url 'logout_page' %}">{% trans 'Выход' %}</a></li>
+                    {% if request.user.is_superuser %}
+                        <li >                            <hr></li>
+                        <li class="lk-tab-link "><a href="{% url 'clear_rating' %}">Clear Rating</a></li>
+                    {% endif %}
 
                 </ul>
             </div>

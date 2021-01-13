@@ -1,6 +1,8 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from game.models import Game,Level
 from .models import *
+from customuser.models import User
 def index(request):
     style = 'dark'
     indexPage = True
@@ -28,6 +30,13 @@ def slider(request):
     return render(request, 'page/slider.html', locals())
 
 
+def clear_rating(request):
+    if request.user.is_superuser:
+        users = User.objects.all()
+        for user in users:
+            user.rating = 0
+            user.save()
+        return HttpResponseRedirect('/lk')
 def lk(request):
     aboutText = Settings.objects.first().about
     rulesText = Settings.objects.first().rules

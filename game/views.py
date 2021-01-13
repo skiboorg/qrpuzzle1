@@ -41,7 +41,7 @@ def win(request):
         game.player.rating += game.level.rating
         print(game.player.balance)
         print(game.level.balance / 100)
-        game.player.balance += game.player.balance * decimal.Decimal((game.level.balance / 100))
+        # game.player.balance += game.player.balance * decimal.Decimal((game.level.balance / 100))
         game.player.save()
         return JsonResponse({'rating': game.player.rating})
     else:

@@ -228,7 +228,6 @@
                             {{ aboutText | safe}}
 
                         </div>
-                        <div class="header-nav-sub-text-buttons"><a target="_blank" style="width: 150px;" href="https://ec.europa.eu/programmes/horizon2020/what-horizon-2020" class="btn btn-blue">{% trans 'Документы' %}</a><a target="_blank" style="width: 150px;" href="{% url 'lk' %}?tab=support" class="btn btn-orange">{% trans 'Чат поддержки' %}</a></div>
                     </div>
                 </li>
                 <li class="header-nav-item has-sub-text"><span v-on:click="openHeaderSubText('rules')">{% trans 'Правила' %}</span>
@@ -254,6 +253,7 @@
                             <p class="header-nav-sub-text-info"></p>
 
                             {{ indoText | safe}}
+     <div class="header-nav-sub-text-buttons"><a target="_blank" style="width: 150px;" href="https://ec.europa.eu/programmes/horizon2020/what-horizon-2020" class="btn btn-blue">WITHDRAW</a><a target="_blank" style="width: 150px;" href="{% url 'lk' %}?tab=support" class="btn btn-orange">DEPOSIT</a></div>
 
                         </div>
                      </div>
