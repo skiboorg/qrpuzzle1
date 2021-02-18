@@ -71,7 +71,7 @@
                     <div class="mobile-user-panel-text-wrapper">
                         <p class="mobile-user-panel-text-header"></p>
                         <p class="mobile-user-panel-text"></p>
-                      {{ aboutText | safe}}
+                        {{ aboutText | safe}}
 
                     </div>
 
@@ -127,12 +127,12 @@
                                     <label  class="lang-select-label {% if language.code == LANGUAGE_CODE %}lang-select-label-selected{% endif %}" for="lang_{{ language.code }}">
                                         <input class="lang-select-input" id="lang_{{ language.code }}" type="radio" name="language" value="{{ language.code }}" onchange="this.form.submit()">
                                         {% if language.code == 'en' %}
-                                                <img src=" {% static 'images/lang-uk-icon.svg' %}" alt="">
-                                            {% elif language.code == 'ru' %}
-                                                <img src="{% static 'images/lang-ru-icon.svg' %}" alt="">
-                                            {% elif language.code == 'zh-hans' %}
-                                                <img src="{% static 'images/lang-ch-icon.svg' %}" alt="">
-                                            {% endif %}
+                                            <img src=" {% static 'images/lang-uk-icon.svg' %}" alt="">
+                                        {% elif language.code == 'ru' %}
+                                            <img src="{% static 'images/lang-ru-icon.svg' %}" alt="">
+                                        {% elif language.code == 'zh-hans' %}
+                                            <img src="{% static 'images/lang-ch-icon.svg' %}" alt="">
+                                        {% endif %}
                                     </label>
                                 </li>
                             {% endfor %}
@@ -216,7 +216,7 @@
                 {#                        </div>#}
                 {#                    </li>#}
                 <li class="header-nav-item"><a href="{% url 'index' %}">{% trans 'Главная' %}</a>
-                 <li class="header-nav-item has-sub-text"><span v-on:click="openHeaderSubText('about')">{% trans 'О нас' %}</span>
+                <li class="header-nav-item has-sub-text"><span v-on:click="openHeaderSubText('about')">{% trans 'О нас' %}</span>
                     <div class="header-nav-sub-text "
                          v-bind:class="{ headerNavSubTextActive: header_sub_text == 'about' }"
                          v-on:mouseleave="openHeaderSubText('about')"><!-- headerNavSubTextActive-->
@@ -243,7 +243,7 @@
                         {#                            <div class="header-nav-sub-text-buttons"><span class="btn btn-blue">DOCUMENTS</span><span class="btn btn-orange">SUPPORT</span></div>#}
                     </div>
                 </li>
-                   <li class="header-nav-item has-sub-text"><span v-on:click="openHeaderSubText('info')">{% trans 'Информация' %}</span>
+                <li class="header-nav-item has-sub-text"><span v-on:click="openHeaderSubText('info')">{% trans 'Информация' %}</span>
                     <div class="header-nav-sub-text "
                          v-bind:class="{ headerNavSubTextActive: header_sub_text == 'info' }"
                          v-on:mouseleave="openHeaderSubText('info')"><!-- headerNavSubTextActive-->
@@ -253,10 +253,10 @@
                             <p class="header-nav-sub-text-info"></p>
 
                             {{ indoText | safe}}
-     <div class="header-nav-sub-text-buttons"><a target="_blank" style="width: 150px;" href="https://ec.europa.eu/programmes/horizon2020/what-horizon-2020" class="btn btn-blue">WITHDRAW</a><a target="_blank" style="width: 150px;" href="{% url 'lk' %}?tab=support" class="btn btn-orange">DEPOSIT</a></div>
+                            <div class="header-nav-sub-text-buttons"><a target="_blank" style="width: 150px;" href="https://ec.europa.eu/programmes/horizon2020/what-horizon-2020" class="btn btn-blue">WITHDRAW</a><a target="_blank" style="width: 150px;" href="{% url 'lk' %}?tab=support" class="btn btn-orange">DEPOSIT</a></div>
 
                         </div>
-                     </div>
+                    </div>
                 </li>
 
             </ul>
@@ -268,12 +268,12 @@
                 <span v-on:click="openHeaderSubMenu('settings')">
                     <img
                             {% if request.session.theme  == 'light' %}
-                            src="{% static 'images/theme-icon-l.svg' %}"
+                                src="{% static 'images/theme-icon-l.svg' %}"
 
                             {% else %}
-                              src="{% static 'images/theme-icon.svg' %}"
+                                src="{% static 'images/theme-icon.svg' %}"
                             {% endif %}
-                            alt=""> <img src="{% static 'images/arrow_down.svg' %}" alt="">
+                                alt=""> <img src="{% static 'images/arrow_down.svg' %}" alt="">
                 </span>
                     <div v-bind:class="{ subMenuActive: header_sub_menu == 'settings' }" class="header-sub-menu  button-sub-menu lang-button">
                         <ul class="header-sub-menu-wrapper">
@@ -286,12 +286,12 @@
                 <li class="header-nav-item-button has-sub-menu lang-button">
                 <span v-on:click="openHeaderSubMenu('lang')">
                      {% if LANGUAGE_CODE == 'en' %}
-                        <img src=" {% static 'images/lang-uk-icon.svg' %}" alt="">
-                    {% elif LANGUAGE_CODE == 'ru' %}
-                        <img src="{% static 'images/lang-ru-icon.svg' %}" alt="">
-                    {% elif LANGUAGE_CODE == 'zh-hans' %}
-                        <img src="{% static 'images/lang-ch-icon.svg' %}" alt="">
-                    {% endif %}
+                         <img src=" {% static 'images/lang-uk-icon.svg' %}" alt="">
+                     {% elif LANGUAGE_CODE == 'ru' %}
+                         <img src="{% static 'images/lang-ru-icon.svg' %}" alt="">
+                     {% elif LANGUAGE_CODE == 'zh-hans' %}
+                         <img src="{% static 'images/lang-ch-icon.svg' %}" alt="">
+                     {% endif %}
 
                     <img src="{% static 'images/arrow_down.svg' %}" alt="">
                 </span>
@@ -376,5 +376,6 @@
             </div>
         {% endif %}
 
-        </div>
+
+    </div>
 </header>

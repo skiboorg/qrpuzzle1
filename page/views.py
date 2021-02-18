@@ -3,6 +3,8 @@ from django.shortcuts import render
 from game.models import Game,Level
 from .models import *
 from customuser.models import User
+def index1(request):
+    return render(request, 'page/index.html', locals())
 def index(request):
     style = 'dark'
     indexPage = True
@@ -13,7 +15,12 @@ def index(request):
     level2 = Level.objects.get(id=2)
     level3 = Level.objects.get(id=3)
 
-    return render(request, 'page/index.html', locals())
+    return render(request, 'page/entrance.html', locals())
+
+def register(request):
+    return render(request, 'page/reg.html', locals())
+def login(request):
+    return render(request, 'page/login.html', locals())
 
 def game(request):
     aboutText = Settings.objects.first().about

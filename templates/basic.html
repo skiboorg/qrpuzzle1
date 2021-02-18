@@ -40,7 +40,7 @@
     {% include 'header.html' %}
     {% block content %}
     {% endblock %}
-<div  class="modal " v-bind:class="{ modalActive:reg_modal }">
+<div  class="modal " :class="{ modalActive:reg_modal }">
     <div class="modal-dialog" >
         <div class="modal-content">
             <div class="close"  v-on:click="openRegModal"><img src="{% static 'images/close-btn.svg' %}" alt=""></div>
@@ -107,7 +107,7 @@
         </div>
     </div>
 </div>
-<div  class="modal " v-bind:class="{ modalActive:result_image_modal }">
+<div  class="modal " :class="{ modalActive:result_image_modal }">
     <div class="modal-dialog" >
         <div class="modal-content">
             <div class="close"  v-on:click="result_image_modal = false, mobile_sub_menu = 'gameselect'"><img src="{% static 'images/close-btn.svg' %}" alt=""></div>
@@ -121,7 +121,7 @@
     </div>
 </div>
 </div>
-{% block js %}
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -451,6 +451,6 @@
         })
 
     </script>
-{% endblock %}
+
 </body>
 </html>

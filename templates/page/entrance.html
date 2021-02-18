@@ -1,0 +1,44 @@
+﻿{% extends 'basic.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div style="background:#283C63 url({% static 'images/new.gif' %}) no-repeat center;
+            height: 90vh;
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;" >
+        <p style="font-size:20px;text-align: center;margin-bottom: 40px">{% trans 'Выберите' %}</p>
+        <div class="game-select-wrapper">
+            <a style="margin-right: 20px" href="{% url 'game'%}?game=qrpuzzle">
+              <div class="game-select-item">
+
+                     <img style="margin-bottom: 0;" src="{% static 'images/qp_i.jpg' %}" alt="">
+
+
+           </div>
+            </a>
+             <a style="margin-right: 20px" href="{% url 'game'%}?game=qart">
+            <div class="game-select-item">
+
+               <img style="margin-bottom: 0;"  src="{% static 'images/qa_i.png' %}" alt="">
+
+            </div>
+             </a>
+              <a href="{% url 'slider' %}">
+            <div class="game-select-item">
+                 {% if request.session.theme  == 'light' %}
+                    <img style="margin-bottom: 0;"  src="{% static 'images/slider_puzzle_logo.png' %}" alt="">
+                {% else %}
+                <img style="margin-bottom: 0;"  src="{% static 'images/slider_puzzle_logo.png' %}" alt="">
+                {% endif %}
+
+
+            </div>
+             </a>
+        </div>
+
+    </div>
+{% endblock %}
+
