@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 import json
 from django.contrib.auth import login, logout,authenticate
 from chat.models import *
-
+from .forms import FeedbackForm
 def register(request):
 
     request_unicode = request.body.decode('utf-8')
@@ -15,6 +15,7 @@ def register(request):
     print(form.errors)
     if form.is_valid():
         new_user = form.save()
+
 
         login(request, new_user)
         return JsonResponse({'status': 'success'}, safe=False)
@@ -103,3 +104,5 @@ def new_deposit(request):
     request.user.balance += int(request_body['summ'])
     request.user.save()
     return JsonResponse({'status':'ok'}, safe=False)
+
+

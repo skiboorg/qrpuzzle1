@@ -136,7 +136,7 @@ body {
 }
 
 .w-bg {
-  background: url(../images/bgg.png);
+  background: url(../images/body_bg.jpg);
 }
 
 .w-bg-s {
@@ -192,15 +192,15 @@ body {
 }
 
 .big-button__img {
-  -webkit-transition: all .5s linear;
-  -o-transition: all .5s linear;
-  transition: all .5s linear;
+  -webkit-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  transition: all 1s linear;
 }
 
 .big-button__img:hover {
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .big-button__text {
@@ -360,6 +360,12 @@ body {
   position: relative;
 }
 
+.has-submenu:hover > .submenu {
+  top: 30px;
+  opacity: 1;
+  pointer-events: all;
+}
+
 .submenu-item-selected {
   background: rgba(0, 1, 29, 0.56);
 }
@@ -371,7 +377,12 @@ body {
   border-radius: 5px;
   width: 185px;
   left: 0;
-  top: 36px;
+  top: 46px;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all .2s linear;
+  -o-transition: all .2s linear;
+  transition: all .2s linear;
 }
 
 .submenu li {
@@ -390,7 +401,7 @@ body {
 }
 
 .menu ul li {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .menu ul li:last-child {
@@ -407,6 +418,7 @@ body {
   color: #ffffff;
   text-transform: uppercase;
   font-size: 18px;
+  line-height: 30px;
 }
 
 .menu ul li svg {
@@ -565,4 +577,16 @@ body {
   .page__mobile {
     display: block;
   }
+}
+
+.page__text{
+    padding: 20px;
+  height: 100vh;
+    overflow-y: auto;
+}
+
+.page__text h1{
+    font-size: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
 }

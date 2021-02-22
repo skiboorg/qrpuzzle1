@@ -72,7 +72,10 @@ def user_post_save(sender, instance, created, **kwargs):
         newChat = Chat.objects.create(user=instance)
         Message.objects.create(chat=newChat,message='Тест приветственного сообщения')
 
-
-
-
 post_save.connect(user_post_save, sender=User)
+
+
+class Feedback(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
+    message = models.TextField('Текст', blank=False, null=True)
+    img = models.ImageField('IMG', upload_to='feedback/images', blank=False, null=True)

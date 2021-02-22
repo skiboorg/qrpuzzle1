@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import User
+from django.forms import ModelForm
+from .models import *
 
 
 class SignUpForm(UserCreationForm):
@@ -19,3 +20,8 @@ class UpdateForm(UserChangeForm):
              'email': {
                  'unique': "Указанный адрес уже кем-то используется",
              },}
+
+class FeedbackForm(ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ('img','message')

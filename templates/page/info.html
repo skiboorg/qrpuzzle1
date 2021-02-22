@@ -1,0 +1,40 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>QR</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/add1.css' %}">
+</head>
+<body >
+<div id="app">
+ <div class="page__wrapper">
+    {% include 'page/_left_side.menu.html' %}
+    <div class="page__text">
+        <h1 >{% trans 'Информация' %}</h1>
+        {{ indoText | safe }}
+    
+
+    </div>
+</div>
+  <div class="page__mobile">
+    <div class="page__mobile-logo">
+        <img src="{% static 'images/logo-b.png' %}" alt="">
+    </div>
+    <div class="page__mobile-text">
+        <h1>We work only on the PC version of the site</h1>
+        <p>Our analytical systems and metrics work only on pc users</p>
+    </div>
+</div>
+</div>
+
+
+
+</body>
+</html>
+
+
