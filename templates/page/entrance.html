@@ -2,14 +2,14 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-    <div style="background:#283C63 url({% static 'images/new.gif' %}) no-repeat center;
-            height: 90vh;
+    <div style="
+            height: 100vh;
             display: flex;
-
+            padding-left: 360px;
             align-items: center;
             justify-content: center;
             flex-direction: column;" >
-        <p style="font-size:20px;text-align: center;margin-bottom: 40px">{% trans 'Выберите' %}</p>
+        <p style="font-size:20px;text-align: center;margin-bottom: 40px;color: #000">{% trans 'Выберите' %}</p>
         <div class="game-select-wrapper">
             <a style="margin-right: 20px" href="{% url 'game'%}?game=qrpuzzle">
               <div class="game-select-item">

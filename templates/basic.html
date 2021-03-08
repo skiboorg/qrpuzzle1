@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
     <title>QR Puzzle</title>
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
     {% if request.session.theme  == 'light' %}
@@ -15,6 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/add.css' %}">
      {% endif %}
+ <link rel="stylesheet" href="{% static 'css/add1.css' %}">
     <style>
         .btnDisabled{
             opacity: 0.5;
@@ -37,7 +40,7 @@
 <body >
 <div id="app" class="app">
     {% csrf_token %}
-    {% include 'header.html' %}
+    {% include 'page/_left_side.menu.html' %}
     {% block content %}
     {% endblock %}
 <div  class="modal " :class="{ modalActive:reg_modal }">

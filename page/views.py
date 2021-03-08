@@ -86,6 +86,7 @@ def lk(request):
     aboutText = Settings.objects.first().about
     rulesText = Settings.objects.first().rules
     indoText = Settings.objects.first().info
+    lkPage=True
     level1 = Level.objects.get(id=1)
     level2 = Level.objects.get(id=2)
     level3 = Level.objects.get(id=3)

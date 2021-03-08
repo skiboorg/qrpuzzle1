@@ -158,12 +158,27 @@ body {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  padding: 0 20px;
+  height: 100vh;
 }
 
 .offer__left {
-  padding-top: 235px;
+  /*padding-top: 235px;*/
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
 }
+.offer__left-img{
+  flex-grow: 3;
+  display: flex;
 
+  align-items: center;
+  justify-content: center;
+}
+.offer__left-text{
+  flex-grow: 2;
+}
 .offer__left h1 {
   font-weight: 500;
   font-size: 48px;
@@ -180,7 +195,9 @@ body {
 }
 
 .offer__right {
-  padding-top: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .offer__right img {
@@ -214,14 +231,16 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  text-align: center;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   cursor: pointer;
-  z-index: -1;
+  z-index: 1;
 }
+
 
 .big-button__text svg {
   margin-right: 10px;
@@ -251,6 +270,7 @@ body {
 }
 
 .footer-left {
+  color: #9394A1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -260,8 +280,8 @@ body {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  -ms-flex-preferred-size: 415px;
-  flex-basis: 415px;
+  width: 400px;
+  flex-grow: 1;
 }
 
 .footer-right {
@@ -294,12 +314,19 @@ body {
 
 .page__wrapper {
   height: 100vh;
-  display: grid;
-  grid-template-columns: 31% 69%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 360px;
 }
 
 .page__left {
-  position: relative;
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 360px;
   background: url(../images/body-bg-s.png) no-repeat;
   background-size: cover !important;
   display: -webkit-box;
@@ -514,9 +541,9 @@ body {
 }
 
 .logo {
-  padding-top: 120px;
+  padding-top: 100px;
   text-align: center;
-  margin-bottom: 230px;
+  margin-bottom: 200px;
 }
 
 .page__mobile {
@@ -580,7 +607,7 @@ body {
 }
 
 .page__text{
-    padding: 20px;
+    padding: 100px;
   height: 100vh;
     overflow-y: auto;
 }

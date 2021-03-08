@@ -4,20 +4,20 @@
 {% block content %}
     <div class="lk-area" @click="mobile_menu = false ; mobile_menu_right = false ">
         <div class="lk-area-wrapper">
-            <div class="lk-tab-links">
-                <ul class="lk-tab-links-wrapper">
-                    <li class="lk-tab-link tab-link-games " :class="{ lkTabLinkActive:lk_tab == 'games' }" @click="lk_tab = 'games' ">{% trans 'Cтатистика' %}</li>
-                    <li class="lk-tab-link tab-link-support " :class="{ lkTabLinkActive:lk_tab == 'support' }" @click="lk_tab = 'support' ">{% trans 'Чат поддержки' %}</li>
-                    <li class="lk-tab-link tab-link-cash" :class="{ lkTabLinkActive:lk_tab == 'cash' }" @click="lk_tab = 'cash' ">{% trans 'Баланс' %}</li>
-                    <li class="lk-tab-link tab-link-settings" :class="{ lkTabLinkActive:lk_tab == 'settings' }" @click="lk_tab = 'settings' ">{% trans 'Наcтройки' %}</li>
-                    <li class="lk-tab-link tab-link-logout"><a href="{% url 'logout_page' %}">{% trans 'Выход' %}</a></li>
-                    {% if request.user.is_superuser %}
-                        <li >                            <hr></li>
-                        <li class="lk-tab-link "><a href="{% url 'clear_rating' %}">Clear Rating</a></li>
-                    {% endif %}
-
-                </ul>
-            </div>
+{#            <div class="lk-tab-links">#}
+{#                <ul class="lk-tab-links-wrapper">#}
+{#                    <li class="lk-tab-link tab-link-games " :class="{ lkTabLinkActive:lk_tab == 'games' }" @click="lk_tab = 'games' ">{% trans 'Cтатистика' %}</li>#}
+{#                    <li class="lk-tab-link tab-link-support " :class="{ lkTabLinkActive:lk_tab == 'support' }" @click="lk_tab = 'support' ">{% trans 'Чат поддержки' %}</li>#}
+{#                    <li class="lk-tab-link tab-link-cash" :class="{ lkTabLinkActive:lk_tab == 'cash' }" @click="lk_tab = 'cash' ">{% trans 'Баланс' %}</li>#}
+{#                    <li class="lk-tab-link tab-link-settings" :class="{ lkTabLinkActive:lk_tab == 'settings' }" @click="lk_tab = 'settings' ">{% trans 'Наcтройки' %}</li>#}
+{#                    <li class="lk-tab-link tab-link-logout"><a href="{% url 'logout_page' %}">{% trans 'Выход' %}</a></li>#}
+{#                    {% if request.user.is_superuser %}#}
+{#                        <li >                            <hr></li>#}
+{#                        <li class="lk-tab-link "><a href="{% url 'clear_rating' %}">Clear Rating</a></li>#}
+{#                    {% endif %}#}
+{##}
+{#                </ul>#}
+{#            </div>#}
             <div v-if="lk_tab == 'games'" class="lk-info">
                 <div class="lk-games">
                     <div class="lk-games-wrapper">
@@ -104,7 +104,7 @@
                         </div>
                             <div class="form-row ">
                             <label>{% trans 'Пол' %}:</label>
-                                <select style="background: #2D325A;
+                                <select style="background: #ffffff;
     border: 1px solid #2B3053;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;

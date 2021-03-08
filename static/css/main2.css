@@ -1721,14 +1721,16 @@ svg {
 }
 
 .side-bar {
-  background: #efefef;
+
   height: calc(100vh - 105px);
   position: absolute;
   width: 235px;
   top: 108px;
-  -webkit-transform: translateX(-100%);
-  -ms-transform: translateX(-100%);
-  transform: translateX(-100%);
+  background: #f5f5f5;
+
+  -webkit-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 .side-bar.sideBarActive {
