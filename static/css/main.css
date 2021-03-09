@@ -243,11 +243,16 @@ svg {
 }
 
 .btn-blue {
-  background: -webkit-gradient(linear, left top, left bottom, from(#4E7CFF), color-stop(182.35%, rgba(78, 124, 255, 0)));
-  background: -o-linear-gradient(top, #4E7CFF 0%, rgba(78, 124, 255, 0) 182.35%);
-  background: linear-gradient(180deg, #4E7CFF 0%, rgba(78, 124, 255, 0) 182.35%);
-  -webkit-box-shadow: 0px 2px 0px #334CCE;
-  box-shadow: 0px 2px 0px #334CCE;
+ border: none;
+    background: #2873D9;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 10px 0;
+    width: 200px;
+    margin: 0 auto 30px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .btn-orange {
@@ -1028,19 +1033,15 @@ svg {
 .lk-info {
   background: #FFFFFF;
   padding: 100px;
-  height: 100vh;
-  overflow-y: auto;
+
 }
 
 .lk-support {
   background: #ffffff;
-  height: 80vh;
-  overflow-y: auto;
+
 }
 
-.lk-support.settings-tab {
-  padding: 30px;
-}
+
 
 .lk-support-wrapper {
   padding: 40px;
@@ -1126,7 +1127,7 @@ svg {
 
 .lk-games-wrapper {
   background: #ffffff;
-  padding: 30px 50px;
+
 }
 
 .lk-games-table {
@@ -1148,7 +1149,7 @@ svg {
 
 .profile-edit-wrapper {
   max-width: 500px;
-  padding: 30px;
+
   background: #FFFFFF;
 }
 
@@ -2068,16 +2069,11 @@ svg {
 
 .form-row input[type='text'],
 .form-row input[type='password'] {
-  background: #FFFFFF;
-  border: 1px solid #f5f5f5;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-box-shadow: inset 2px 4px 6px rgba(0, 0, 0, 0.13);
-  box-shadow: inset 2px 4px 6px rgba(0, 0, 0, 0.13);
-  border-radius: 4px;
-  height: 50px;
-  padding: 0 20px;
-  color: #7B7E9E;
+  border: none;
+    background: #E7EAF2;
+    border-radius: 5px;
+    padding: 10px 25px;
+    margin-bottom: 15px;
 }
 
 .form-row input[type='text']:focus,

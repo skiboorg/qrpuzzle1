@@ -11,6 +11,7 @@ urlpatterns = [
     path('rules', views.rules, name='rules'),
     path('info', views.info, name='info'),
     path('feedbacks', views.feedbacks, name='feedbacks'),
+    path('contacts', views.callback, name='contacts'),
     path('register', views.register, name='register_page'),
     path('game/', views.game, name='game'),
     path('slider/', views.slider, name='slider'),

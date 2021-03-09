@@ -3,7 +3,7 @@ from django.shortcuts import render
 from game.models import Game,Level
 from .models import *
 from customuser.models import *
-from customuser.forms import FeedbackForm
+from customuser.forms import *
 def index1(request):
     return render(request, 'page/index.html', locals())
 def index(request):
@@ -24,19 +24,36 @@ def login(request):
     return render(request, 'page/login.html', locals())
 
 def about(request):
+    isInfoPage = True
     aboutText = Settings.objects.first().about
     return render(request, 'page/about.html', locals())
 
 
 def rules(request):
+    isInfoPage = True
     rulesText = Settings.objects.first().rules
     return render(request, 'page/rules.html', locals())
 
 
 def info(request):
+    isInfoPage = True
     indoText = Settings.objects.first().info
     return render(request, 'page/info.html', locals())
 
+
+def callback(request):
+    if request.POST:
+        req = request.POST
+        form = CallbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        form = CallbackForm()
+
+    form = CallbackForm()
+
+    return render(request, 'page/contact.html', locals())
 
 def feedbacks(request):
     print(request.POST)

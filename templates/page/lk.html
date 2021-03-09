@@ -20,6 +20,7 @@
 {#            </div>#}
             <div v-if="lk_tab == 'games'" class="lk-info">
                 <div class="lk-games">
+                <h3 style="font-size: 30px;    margin-bottom: 30px; font-weight: bold;"> ASSEMBLY</h3>
                     <div class="lk-games-wrapper">
                         <table class="lk-games-table">
                             <tr class="lk-games-table-head">
@@ -78,7 +79,10 @@
                 </div>
             </div>
             <div v-if="lk_tab == 'settings'" class="lk-info">
+
+
                 <div class="lk-support settings-tab">
+                     <h3 style="font-size: 30px;    margin-bottom: 30px; font-weight: bold;"> Settings</h3>
                     <div class="profile-edit-wrapper">
                         <form action="{% url 'profile_edit' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
@@ -104,16 +108,11 @@
                         </div>
                             <div class="form-row ">
                             <label>{% trans 'Пол' %}:</label>
-                                <select style="background: #ffffff;
-    border: 1px solid #2B3053;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-box-shadow: inset 2px 4px 6px rgba(0, 0, 0, 0.13);
-    box-shadow: inset 2px 4px 6px rgba(0, 0, 0, 0.13);
-    border-radius: 4px;
-    height: 50px;
-    padding: 0 20px;
-    color: #7B7E9E;"  name="sex" v-model="sex">
+                                <select style="border: none;
+    background: #E7EAF2;
+    border-radius: 5px;
+    padding: 10px 25px;
+    margin-bottom: 15px;"  name="sex" v-model="sex">
                                     <option value="m">{% trans 'Мужчина' %}</option>
                                     <option value="f">{% trans 'Женщина' %}</option>
                                 </select>
@@ -139,10 +138,11 @@
         <div v-if="lk_tab == 'cash'" class="lk-info">
                 <div class="lk-support cash-tab">
                    <div v-if="modal_login_body" >
-                    <div class="modal-header">
+
 {#                        <p>WITHDRAW</p>#}
-                        <p>TEMPORARILY NOT ACCEPTED</p>
-                    </div>
+                        <h3 style="font-size: 30px;    margin-bottom: 30px; font-weight: bold;"> TEMPORARILY NOT ACCEPTED</h3>
+
+
                     <div class="modal-body">
                         <div style="max-width: 260px" class="toggleButton">
                             <p   v-bind:class="{ toggleButtonActiveLeft: modal_login_body }">WITHDRAW</p>
@@ -173,10 +173,8 @@
 
                 </div>
                 <div v-else>
-                    <div class="modal-header">
-{#                        <p>DEPOSIT</p>#}
-                          <p>TEMPORARILY NOT ACCEPTED</p>
-                    </div>
+                      <h3 style="font-size: 30px;    margin-bottom: 30px; font-weight: bold;"> TEMPORARILY NOT ACCEPTED</h3>
+
                     <div class="modal-body">
                         <div style="max-width: 260px" class="toggleButton">
                             <p  v-on:click="modal_login_body=true">WITHDRAW</p>

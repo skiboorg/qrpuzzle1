@@ -25,3 +25,8 @@ class FeedbackForm(ModelForm):
     class Meta:
         model = Feedback
         fields = ('img','message')
+
+class CallbackForm(ModelForm):
+    class Meta:
+        model = CallBack
+        fields = ('name','email','message')

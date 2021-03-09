@@ -15,20 +15,11 @@
  <div class="page__wrapper no-center">
     {% include 'page/_left_side.menu.html' %}
     <div class="page__text">
-        <h1 >FEEDBACK</h1>
-        {% for feedback in allFeedbacks %}
-            <div class="" >
-            <p>FROM: {{ feedback.user.nickname }}</p>
-                <a href="{{ feedback.img.url }}" target="_blank">
-                    <img style="width: 100px;height: 100px; object-fit: contain" src="{{ feedback.img.url }}" alt="">
-                </a>
+        <h1 >Contacts</h1>
 
-            <p>{{ feedback.message }}</p>
-            </div>
-        {% endfor %}
-        <form class="auth-form" action="{% url 'feedbacks' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <form class="auth-form" action="{% url 'contacts' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form }}
-            <button style="margin-top: 20px" type="submit">send</button>
+            <button style="margin-top: 20px">send</button>
         </form>
 
 
