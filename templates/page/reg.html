@@ -8,6 +8,7 @@
     <title>QR</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'css/main.css' %}">
      <link rel="stylesheet" href="{% static 'css/add1.css' %}">
 </head>
 <body >
@@ -19,15 +20,42 @@
             <h1>REGISTRATION</h1>
             <input type="email" required v-model="email" placeholder="Email">
             <input type="text" required v-model="nickname" placeholder="Nickname">
+            <select style="border: none;
+    background: #E7EAF2;
+    border-radius: 5px;
+    padding: 10px 25px;
+    margin-bottom: 15px;"  name="sex" v-model="sex" >
+                                    <option value="m">{% trans 'Мужчина' %}</option>
+                                    <option value="f">{% trans 'Женщина' %}</option>
+                                </select>
+            <input type="text" required v-model="education" placeholder="education">
+            <input type="text" required v-model="location" placeholder="location">
+            <input type="text" required v-model="age" placeholder="age">
             <input type="password" required v-model="password1" placeholder="Password">
             <input type="password" required v-model="password2" placeholder="Repeat password">
             <button @click="sendSignUp">REGISTER</button>
-            <div style="margin-bottom: 20px;color: red; max-width: 293px;" v-html="reg_error"></div>
+{#            <div style="margin-bottom: 20px;color: red; max-width: 293px;" v-html="reg_error"></div>#}
             <p class="auth-form__grey">Have account? <a href="{% url 'login' %}">Login</a></p>
 
         </div>
 
     </div>
+     <div  class="modal " v-bind:class="{ modalActive:modalActive }">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="close"  @click="modalActive=false"><img src="{% static 'images/close-btn.svg' %}" alt=""></div>
+                <div class="modal-header">
+                    <p >[[modalTitle]]</p>
+                </div>
+                <div class="modal-body">
+                    <p v-html="modalBody"></p>
+                </div>
+            <div v-if="regOk" style="margin-top: 20px; text-align: center">
+                         <a style="display: inline-block"  class="btn-blue" href="{% url 'index' %}">OK</a>
+                    </div>
+        </div>
+    </div>
+</div>
 </div>
    <div class="page__mobile">
     <div class="page__mobile-logo">
@@ -51,8 +79,16 @@
             delimiters: ['[[', ']]'],
             el: '#app',
             data: {
+                modalActive:false,
+                modalTitle:'',
+                modalBody:'',
+                regOk:false,
                 email:null,
                 nickname:null,
+                sex:null,
+                education:null,
+                location:null,
+                age:null,
                 password1:null,
                 password2:null,
                 reg_error:'',
@@ -65,7 +101,12 @@
                         'email':this.email,
                         'nickname':this.nickname,
                         'password1':this.password1,
-                        'password2':this.password2}
+                        'password2':this.password2,
+                        'sex':this.sex,
+                        'study':this.education,
+                        'region':this.location,
+                        'age':this.age
+                    }
 
                     fetch('{% url 'register' %}', {
                         method: 'post',
@@ -77,7 +118,11 @@
 
                             console.log(res)
                             if(res['status']==='success'){
-                                window.location.href='{% url 'index' %}'
+                                this.modalTitle='Success'
+                                this.modalBody='Register success'
+                                this.regOk=true
+                                this.modalActive = true
+
                             }else{
                                 if(res['errors']['email']){
                                     this.reg_error = this.reg_error + 'Email: '+ res['errors']['email'] + '<br>'
@@ -85,6 +130,9 @@
                                 if(res['errors']['password2']){
                                     this.reg_error = this.reg_error + 'Password: '+ res['errors']['password2']
                                 }
+                                this.modalTitle='Error'
+                                this.modalBody= this.reg_error
+                                this.modalActive = true
 
                             }
                         })

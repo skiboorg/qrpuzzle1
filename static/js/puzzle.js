@@ -373,10 +373,12 @@ var jQuery = window.jQuery || require('jquery');
       var game_board_offset = $('#game').offset();
       var game_board_width = $('#game').width();
       var game_board_height = $('#game').height();
+      console.log('game_board_offset',game_board_offset)
       if (pageX < game_board_offset.left+20 || pageX > game_board_offset.left + game_board_width - 20
           || pageY < game_board_offset.top+20 || pageY >  game_board_offset.top + game_board_height - 20)
+
       {
-        return null
+        //return null
       }
 
       var position_x,
@@ -946,6 +948,10 @@ function concide() {
     app.result_image_modal = true
     app.result_image = image_url
       $('#puzzle-board svg').remove()
+    setTimeout( function (){
+      app.showClose = true
+    }, 20000);
+
 
    // $('#result_img').html('<div id="concide_image" style="margin:auto"><img class="img_end" src="' + image_url + '"></div>')
    // document.getElementById('puzzle-board').style.display='none'

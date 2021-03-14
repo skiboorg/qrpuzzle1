@@ -1173,7 +1173,7 @@ svg {
 
 .game-area::after {
   position: absolute;
-  content: '';
+  content: none;
   width: 200px;
   right: -200px;
   top: -200px;
@@ -1969,10 +1969,10 @@ svg {
   -ms-flex-direction: column;
   flex-direction: column;
   background-clip: padding-box;
-  background: #383E6C;
+  background: #FFFFFF;
   border-radius: 4px;
   outline: 0;
-  padding: 55px 0;
+  padding: 25px 0;
   width: 690px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -2082,9 +2082,9 @@ svg {
 }
 
 .modal-body {
-  width: 400px;
 
-  margin-bottom: 20px;
+  padding: 0 30px;
+  color: #262626;
 }
 
 .toggleButton {
@@ -2396,3 +2396,4 @@ svg {
     flex-direction: column;
   }
 }
+

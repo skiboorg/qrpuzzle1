@@ -44,7 +44,7 @@ $('.complexity_btn').on('click', function(e){
   levelBtn2.classList.add('btnDisabled')
   levelBtn3.classList.add('btnDisabled')
   let data = sessionStorage.getItem('key');
-
+  app.showClose = false
   $.ajax({
     method: "POST",
     url: "/game/start/",

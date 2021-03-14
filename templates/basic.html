@@ -113,7 +113,7 @@
 <div  class="modal " :class="{ modalActive:result_image_modal }">
     <div class="modal-dialog" >
         <div class="modal-content">
-            <div class="close"  v-on:click="result_image_modal = false, mobile_sub_menu = 'gameselect'"><img src="{% static 'images/close-btn.svg' %}" alt=""></div>
+            <div v-if="showClose" class="close"  v-on:click="result_image_modal = false, mobile_sub_menu = 'gameselect'"><img src="{% static 'images/close-btn.svg' %}" alt=""></div>
                 <div class="modal-header">
                     <p :class="{colorRed : !result}">[[result_title]]</p>
                 </div>
@@ -175,7 +175,8 @@
                 new_msg:'',
                 reg_error:'',
                 deposit_summ:0,
-                result:false
+                result:false,
+                showClose:false
 
             },
             mounted: function () {
@@ -336,7 +337,13 @@
                         'email':this.email,
                         'nickname':this.nickname,
                         'password1':this.password1,
-                        'password2':this.password2}
+                        'password2':this.password2,
+                        'sex':this.sex,
+                        'study':this.education,
+                        'region':this.location,
+                        'age':this.age,
+                    }
+                    console.log(body)
 
                     fetch('{% url 'register' %}', {
                         method: 'post',

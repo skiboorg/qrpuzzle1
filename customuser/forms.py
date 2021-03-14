@@ -9,7 +9,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'nickname',  'password1', 'password2', )
+        fields = ('email', 'nickname','age','region','sex','study',  'password1', 'password2', )
 
 class UpdateForm(UserChangeForm):
     class Meta:

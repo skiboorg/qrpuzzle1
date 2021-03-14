@@ -46,6 +46,14 @@
             </ul>
         {% else %}
             {% if not lkPage %}
+                 {% if request.user.is_authenticated %}
+                <div style="margin-bottom: 20px">
+                 <p >Rating: <span id="rating_desktop">{{ request.user.rating }}</span></p>
+                 <p >Balance: <span id="rating_desktop">{{ request.user.balance }} QR</span></p>
+
+                </div>
+                     {% endif %}
+
                 <ul>
                     {% if request.user.is_authenticated %}
                         <li><a href="{% url 'lk' %}">
