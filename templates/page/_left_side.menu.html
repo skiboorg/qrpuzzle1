@@ -129,10 +129,10 @@
                     <li  :class="{ lkTabLinkActive:lk_tab == 'cash' }" @click="lk_tab = 'cash' "><a href="" onclick="return false;">{% trans 'Баланс' %}</a></li>
                     <li  :class="{ lkTabLinkActive:lk_tab == 'settings' }" @click="lk_tab = 'settings' "><a href="" onclick="return false;">{% trans 'Наcтройки' %}</a></li>
                     <li ><a href="{% url 'logout_page' %}">{% trans 'Выход' %}</a></li>
-                    {% if request.user.is_superuser %}
-                        <li >                            <hr></li>
-                        <li class="lk-tab-link "><a href="{% url 'clear_rating' %}">Clear Rating</a></li>
-                    {% endif %}
+{#                    {% if request.user.is_superuser %}#}
+{#                        <li >                            <hr></li>#}
+{#                        <li class="lk-tab-link "><a href="{% url 'clear_rating' %}">Clear Rating</a></li>#}
+{#                    {% endif %}#}
 
                 </ul>
             {% endif %}

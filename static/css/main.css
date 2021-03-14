@@ -189,7 +189,7 @@ a {
 }
 
 .app {
-  overflow: hidden;
+  overflow: auto;
   height: 100vh;
 }
 

@@ -948,9 +948,12 @@ function concide() {
     app.result_image_modal = true
     app.result_image = image_url
       $('#puzzle-board svg').remove()
+  setInterval(() => app.counter--, 1000);
+
     setTimeout( function (){
       app.showClose = true
     }, 20000);
+
 
 
    // $('#result_img').html('<div id="concide_image" style="margin:auto"><img class="img_end" src="' + image_url + '"></div>')

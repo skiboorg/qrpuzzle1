@@ -113,12 +113,20 @@
 <div  class="modal " :class="{ modalActive:result_image_modal }">
     <div class="modal-dialog" >
         <div class="modal-content">
+            <div v-if="counter>0" style=" position: absolute;right: 10px;top: 10px">
+                <p style="color: #262626">[[counter]]</p>
+            </div>
             <div v-if="showClose" class="close"  v-on:click="result_image_modal = false, mobile_sub_menu = 'gameselect'"><img src="{% static 'images/close-btn.svg' %}" alt=""></div>
                 <div class="modal-header">
                     <p :class="{colorRed : !result}">[[result_title]]</p>
                 </div>
                 <div class="modal-body">
-                    <img :src=[[result_image]] alt="">
+{#                    <img :src=[[result_image]] alt="">#}
+                                <video width="100%" controls>
+  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+  <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+  Your browser does not support HTML video.
+</video>
                 </div>
         </div>
     </div>
@@ -128,9 +136,13 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/puzzle.js' %}"></script>
+    <script src="{% static 'js/sl.js' %}"></script>
+
 
     <script>
         var app = new Vue({
@@ -145,6 +157,7 @@
                   main_logo: '{% static 'images/qrlevel-white.png' %}',
                 result_image_modal:false,
                 result_image:'',
+                counter:20,
                 game_level:0,
                 game_type:2,
                 current_game_id:0,
@@ -253,6 +266,7 @@
             },
             methods: {
                 start_slider: function(p,t,l) {
+                    console.log('sdfds')
 
                     slider(p,t,l)
                 }

@@ -45,7 +45,7 @@ class User(AbstractUser):
     email = models.EmailField('Эл. почта', blank=False , null=True, unique=True)
     nickname = models.CharField('Ник', max_length=50, blank=False, null=True)
     avatar = models.ImageField('Аватар', upload_to='user/avatar', blank=True, null=True)
-    balance = models.DecimalField('Баланс', default=0,decimal_places=2,max_digits=8)
+    balance = models.IntegerField('Баланс', default=300)
     rating = models.IntegerField('Рейтинг', default=0)
     age = models.IntegerField('Возраст', default=0)
     last_image = models.IntegerField(default=0)
