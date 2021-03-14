@@ -23,6 +23,9 @@ def register(request):
 def login(request):
     return render(request, 'page/login.html', locals())
 
+def rating(request):
+    users = User.objects.all().order_by('-rating')
+    return render(request, 'page/rating.html', locals())
 def about(request):
     isInfoPage = True
     aboutText = Settings.objects.first().about
