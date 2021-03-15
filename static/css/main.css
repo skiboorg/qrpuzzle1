@@ -1148,8 +1148,9 @@ svg {
 }
 
 .profile-edit-wrapper {
-  max-width: 500px;
-
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 150px;
   background: #FFFFFF;
 }
 
@@ -2052,12 +2053,11 @@ svg {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: center;
+
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+
+  justify-content: flex-start;
   margin-bottom: 20px;
 }
 
@@ -2065,6 +2065,7 @@ svg {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  color: #9394A1
 }
 
 .form-row input[type='text'],
@@ -2088,10 +2089,10 @@ svg {
 }
 
 .toggleButton {
-  border: 2px solid #434B8C;
+  border: 1px solid #2873D9;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border-radius: 36px;
+  border-radius: 5px;
   max-width: 200px;
   margin: 0 auto;
   display: -webkit-box;
@@ -2112,19 +2113,22 @@ svg {
   -ms-flex-preferred-size: 100%;
   flex-basis: 100%;
   text-align: center;
-  line-height: 27px;
+  line-height: 29px;
   cursor: pointer;
   padding: 0 10px;
+  color: #848484;
 }
 
 .toggleButtonActiveLeft {
-  background: #434B8C;
-  border-radius: 26px 0px 0px 26px;
+  background: #2873D9;
+  border-radius: 3px 0px 0px 3px;
+  color: #FFFFFF !important;
 }
 
 .toggleButtonActiveRight {
-  background: #434B8C;
-  border-radius: 0 26px 26px 0;
+  background: #2873D9;
+  border-radius: 0 3px 3px 0;
+  color: #FFFFFF !important;
 }
 
 .modal-table-wrapper {

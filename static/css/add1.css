@@ -475,6 +475,12 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
 }
+.auth-form textarea{
+    background: #E7EAF2;
+border-radius: 5px;
+  border: none;
+  padding: 25px 30px;
+}
 
 .auth-form h1 {
   font-weight: 700;
@@ -618,8 +624,54 @@ body {
     overflow-y: auto;
 }
 
-.page__text h1{
-    font-size: 30px;
-    margin-bottom: 30px;
+.page-title{
+    font-size: 24px;
     font-weight: bold;
+  margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.page-info{
+    font-size: 14px;
+    color: #9394A1;
+  margin-bottom: 40px;
+}
+.fb-form{
+   display: flex;
+
+  flex-direction: column;
+}
+.fb-form label{
+  display: none;
+}
+.fb-form textarea{
+  background: #E7EAF2;
+border-radius: 5px;
+  border: none;
+  padding: 25px 30px;
+}
+.fb-form button{
+  border: none;
+    background: #2873D9;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 10px 0;
+    width: 200px;
+    margin: 0 auto 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.fb-form input{
+  border: none;
+    background: #2873D9;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 10px 0;
+    width: 200px;
+   margin-bottom: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
 }

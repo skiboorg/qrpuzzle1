@@ -79,6 +79,7 @@ class Feedback(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     message = models.TextField('Текст', blank=False, null=True)
     img = models.ImageField('IMG', upload_to='feedback/images', blank=False, null=True)
+    created_at = models.DateField(auto_now_add=True)
 
 
 class CallBack(models.Model):

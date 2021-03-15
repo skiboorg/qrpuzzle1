@@ -12,39 +12,57 @@
 </head>
 <body >
 <div id="app">
- <div class="page__wrapper no-center">
-    {% include 'page/_left_side.menu.html' %}
-    <div class="page__text">
-        <h1 >FEEDBACK</h1>
-        {% for feedback in allFeedbacks %}
-            <div class="" >
-            <p>FROM: {{ feedback.user.nickname }}</p>
-                <a href="{{ feedback.img.url }}" target="_blank">
-                    <img style="width: 100px;height: 100px; object-fit: contain" src="{{ feedback.img.url }}" alt="">
-                </a>
+    <div class="page__wrapper no-center">
+        {% include 'page/_left_side.menu.html' %}
+        <div class="page__text">
+            <h1 class="page-title">FEEDBACK</h1>
+            <p class="page-info">Only registred users can send their messenges! We attach the contact details of users so that you can contact them and make sure that these reviews are transparent! When you send your review, it will be published only if we pass moderation for violations of the rules of the service.</p>
+            {% for feedback in allFeedbacks %}
+                <div class="" >
+                <p style="text-align: right; font-size: 12px; margin-bottom: 10px">{{ feedback.created_at | date }}</p>
 
-            <p>{{ feedback.message }}</p>
-            </div>
-        {% endfor %}
-        <form class="auth-form" action="{% url 'feedbacks' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{ form }}
-            <button style="margin-top: 20px" type="submit">send</button>
-        </form>
+                    <p style="background: #E7EAF2;border-radius: 5px; padding: 25px 30px; font-weight: bold">{{ feedback.message }}</p>
+                    <div style="display: flex; align-items: center; justify-content: space-between">
+                        <div class="">
+                            <a href="{{ feedback.img.url }}" target="_blank">
+                                <img style="width: 100px;height: 100px; object-fit: contain" src="{{ feedback.img.url }}" alt="">
+                            </a>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between">
+                             <img style="border-radius :100%;width: 30px;height: 30px; object-fit: cover;margin-right: 30px" src="{{ feedback.user.avatar.url}}" alt="">
+                            <div class="">
+                             <p style="font-size: 14px; font-weight: bold">{{ feedback.user.nickname }}</p>
+                             <p style="font-size: 10px">{{ feedback.user.email }}</p>
+                            </div>
+                        </div>
+
+                    </div>
 
 
 
 
+                </div>
+            {% endfor %}
+        <p class="page-title">YOUR feedback</p>
+            <form class="fb-form" action="{% url 'feedbacks' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+                {{ form }}
+                <button style="margin-top: 20px" type="submit">send</button>
+            </form>
+
+
+
+
+        </div>
     </div>
-</div>
-  <div class="page__mobile">
-    <div class="page__mobile-logo">
-        <img src="{% static 'images/logo-b.png' %}" alt="">
+    <div class="page__mobile">
+        <div class="page__mobile-logo">
+            <img src="{% static 'images/logo-b.png' %}" alt="">
+        </div>
+        <div class="page__mobile-text">
+            <h1>We work only on the PC version of the site</h1>
+            <p>Our analytical systems and metrics work only on pc users</p>
+        </div>
     </div>
-    <div class="page__mobile-text">
-        <h1>We work only on the PC version of the site</h1>
-        <p>Our analytical systems and metrics work only on pc users</p>
-    </div>
-</div>
 </div>
 
 

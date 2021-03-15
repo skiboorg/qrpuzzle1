@@ -15,8 +15,14 @@
  <div class="page__wrapper no-center">
     {% include 'page/_left_side.menu.html' %}
     <div class="page__text">
-        <h1 >Contacts</h1>
-
+        <h1 class="page-title">Contacts</h1>
+<p class="page-info">In this section, we have indicated contacts for feedback with us! If you have any questions or suggestions, please contact us!</p>
+ <div class="page-info">
+     <p>Company: 为注册YY产品与服务相关账号（以下统称“YY账号”）</p>
+     <p>Adress: 为务相关账, 以下统称 32 street</p>
+ </div>
+        <p class="page-title">YOUR MESSAGE</p>
+        <p class="page-info">We will answer you within 24 hours to your specified mail for your support request, question or suggestion!</p>
         <form class="auth-form" action="{% url 'contacts' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form }}
             <button style="margin-top: 20px">send</button>
