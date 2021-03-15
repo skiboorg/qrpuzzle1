@@ -45,7 +45,7 @@ class User(AbstractUser):
     email = models.EmailField('Эл. почта', blank=False , null=True, unique=True)
     nickname = models.CharField('Ник', max_length=50, blank=False, null=True)
     avatar = models.ImageField('Аватар', upload_to='user/avatar', blank=True, null=True)
-    balance = models.IntegerField('Баланс', default=300)
+    balance = models.IntegerField('Баланс', default=1000)
     rating = models.IntegerField('Рейтинг', default=0)
     age = models.IntegerField('Возраст', default=0)
     last_image = models.IntegerField(default=0)
@@ -78,8 +78,9 @@ post_save.connect(user_post_save, sender=User)
 class Feedback(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     message = models.TextField('Текст', blank=False, null=True)
-    img = models.ImageField('IMG', upload_to='feedback/images', blank=False, null=True)
+    img = models.ImageField('IMG', upload_to='feedback/images', blank=True, null=True)
     created_at = models.DateField(auto_now_add=True)
+    is_show = models.BooleanField(default=False)
 
 
 class CallBack(models.Model):

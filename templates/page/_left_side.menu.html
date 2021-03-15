@@ -11,6 +11,13 @@
 
     </div>
     <div class="menu">
+    {% if request.user.is_authenticated %}
+                    <div style="margin-bottom: 20px;color: #ffffff">
+                        <p >Rating: <span id="rating_desktop">{{ request.user.rating }}</span></p>
+                        <p >Balance: <span id="rating_desktop">{{ request.user.balance }} QR</span></p>
+
+                    </div>
+                {% endif %}
         {% if isInfoPage %}
             <ul>
                 <li><a href="{% url 'index' %}" >
@@ -53,13 +60,7 @@
             </ul>
         {% else %}
             {% if not lkPage %}
-                {% if request.user.is_authenticated %}
-                    <div style="margin-bottom: 20px">
-                        <p >Rating: <span id="rating_desktop">{{ request.user.rating }}</span></p>
-                        <p >Balance: <span id="rating_desktop">{{ request.user.balance }} QR</span></p>
 
-                    </div>
-                {% endif %}
 
                 <ul>
                     {% if request.user.is_authenticated %}
@@ -89,6 +90,7 @@
 
                         info
                     </a></li>
+                {% if request.user.is_authenticated %}
                     <li><a href="{% url 'rating' %}">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8.14301 15.857H5.57001V9.43H8.14301V15.857ZM13.286 15.857H10.714V3H13.286V15.857ZM18.428 15.857H15.858V6.857H18.428V15.857Z" />
@@ -96,7 +98,27 @@
                         </svg>
 
                         Rating
-                    </a></li>
+                    </a>
+                    </li>
+                    {% else %}
+                       <li><a href="{% url 'about' %}">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.75 11.25L11.25 15.747L3.0015 15.75C2.80311 15.7508 2.61253 15.6728 2.47161 15.5332C2.3307 15.3935 2.25099 15.2036 2.25 15.0052V2.99475C2.25 2.58375 2.58375 2.25 2.99475 2.25H15.0052C15.4163 2.25 15.75 2.592 15.75 3.0015V11.25ZM14.25 3.75H3.75V14.25H9.75V10.5C9.75002 10.3163 9.81747 10.139 9.93954 10.0017C10.0616 9.86444 10.2298 9.77674 10.4123 9.75525L10.5 9.75L14.25 9.74925V3.75ZM13.6283 11.2492L11.25 11.25V13.6268L13.6283 11.2492Z" />
+                    </svg>
+                    {% trans 'О нас' %}
+                </a>
+                    <li><a href="{% url 'rules' %}">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.75 11.25L11.25 15.747L3.0015 15.75C2.80311 15.7508 2.61253 15.6728 2.47161 15.5332C2.3307 15.3935 2.25099 15.2036 2.25 15.0052V2.99475C2.25 2.58375 2.58375 2.25 2.99475 2.25H15.0052C15.4163 2.25 15.75 2.592 15.75 3.0015V11.25ZM14.25 3.75H3.75V14.25H9.75V10.5C9.75002 10.3163 9.81747 10.139 9.93954 10.0017C10.0616 9.86444 10.2298 9.77674 10.4123 9.75525L10.5 9.75L14.25 9.74925V3.75ZM13.6283 11.2492L11.25 11.25V13.6268L13.6283 11.2492Z" />
+                    </svg>
+                    {% trans 'Правила' %}
+
+                </a>
+                </li>
+
+                </li>
+
+                    {% endif %}
 
                     <li><a href="{% url 'feedbacks' %}">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

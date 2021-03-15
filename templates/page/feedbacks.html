@@ -24,9 +24,11 @@
                     <p style="background: #E7EAF2;border-radius: 5px; padding: 25px 30px; font-weight: bold">{{ feedback.message }}</p>
                     <div style="display: flex; align-items: center; justify-content: space-between">
                         <div class="">
+                            {% if feedback.img %}
                             <a href="{{ feedback.img.url }}" target="_blank">
                                 <img style="width: 100px;height: 100px; object-fit: contain" src="{{ feedback.img.url }}" alt="">
                             </a>
+                            {% endif %}
                         </div>
                         <div style="display: flex; align-items: center; justify-content: space-between">
                              <img style="border-radius :100%;width: 30px;height: 30px; object-fit: cover;margin-right: 30px" src="{{ feedback.user.avatar.url}}" alt="">
@@ -43,11 +45,13 @@
 
                 </div>
             {% endfor %}
+        {% if request.user.is_authenticated %}
         <p class="page-title">YOUR feedback</p>
             <form class="fb-form" action="{% url 'feedbacks' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
                 {{ form }}
                 <button style="margin-top: 20px" type="submit">send</button>
             </form>
+        {% endif %}
 
 
 

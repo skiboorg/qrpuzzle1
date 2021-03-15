@@ -494,7 +494,7 @@ border-radius: 5px;
   color: #9394A1;
   font-size: 12px;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 85px;
 }
 
 .auth-form__grey a {
@@ -554,7 +554,7 @@ border-radius: 5px;
 .logo {
   padding-top: 100px;
   text-align: center;
-  margin-bottom: 200px;
+  margin-bottom: 150px;
 }
 
 .page__mobile {
@@ -632,7 +632,7 @@ border-radius: 5px;
 }
 
 .page-info{
-    font-size: 14px;
+    font-size: 16px;
     color: #9394A1;
   margin-bottom: 40px;
 }
@@ -674,4 +674,10 @@ border-radius: 5px;
    margin-bottom: 20px;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+@media (max-width: 1440px) {
+  .container{
+    max-width: 1270px;
+  }
 }

@@ -45,6 +45,7 @@ def info(request):
 
 
 def callback(request):
+    isInfoPage = True
     if request.POST:
         req = request.POST
         form = CallbackForm(request.POST)
@@ -76,7 +77,7 @@ def feedbacks(request):
         form = FeedbackForm()
 
     form = FeedbackForm()
-    allFeedbacks = Feedback.objects.all()
+    allFeedbacks = Feedback.objects.filter(is_show=True)
     return render(request, 'page/feedbacks.html', locals())
 
 
