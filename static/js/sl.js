@@ -246,6 +246,7 @@ function start_slider(p,t,l) {
             });
 
             //sortable
+            console.log($("#puzzle-cont"))
             $("#puzzle-cont").sortable();
 
 

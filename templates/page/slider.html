@@ -42,6 +42,7 @@
                     <p class="side-bar-game-info">6 {% trans 'минуты на сбор' %}</p>
                     <p class="side-bar-game-info">6% {% trans 'на баланс' %}</p>
                 </div>
+                 <a v-bind:class="{btnDisabled : result_image_modal }" style="width: 100%; display: block;text-align: center;" class="btn-blue" href="{% url 'index' %}">Back to games</a>
 
             </div>
 

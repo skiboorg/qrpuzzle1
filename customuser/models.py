@@ -47,7 +47,7 @@ class User(AbstractUser):
     avatar = models.ImageField('Аватар', upload_to='user/avatar', blank=True, null=True)
     balance = models.IntegerField('Баланс', default=1000)
     rating = models.IntegerField('Рейтинг', default=0)
-    age = models.IntegerField('Возраст', default=0)
+    age = models.IntegerField('Возраст', default=0,blank=True)
     last_image = models.IntegerField(default=0)
     region = models.CharField('Регион', max_length=50, blank=True, null=True)
     sex = models.CharField('Пол', max_length=50, blank=True, null=True)
