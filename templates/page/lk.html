@@ -141,7 +141,8 @@
                 <div class="lk-support cash-tab">
                     <div v-if="modal_login_body" >
                     <h3 class="page-title">CASH FLOW</h3>
-                    <p class="page-info">In this section, you can withdraw funds in the withdrawal section and replenish your balance in the deposit section</p>
+                    <p class="page-info">In this section, you can withdraw funds in the withdrawal section and replenish your balance in the deposit section.<br>
+                    You can withdraw the amount from the balance from 1000 QR. The minimum balance of the user after withdrawal must remain 1000 QR</p>
 
 
 
@@ -156,14 +157,9 @@
                             </div>
                             <div class="form-row">
 
-                                <label class="cash_label" for="w1"><input class="cash_input" id="w1" type="radio" name="withdraw_type" v-model="is_login_agree"> <img style="width: 150px" src="{% static 'images/mc.png' %}" alt=""> <img style="width: 150px" src="{% static 'images/vv.png' %}" alt=""></label>
+                                <label class="cash_label" for="w1"><input class="cash_input" id="w1" type="radio" name="withdraw_type" v-model="is_login_agree"> <img style="width: 115px" src="{% static 'images/mc.png' %}" alt=""> <img style="width: 150px" src="{% static 'images/vv.png' %}" alt=""></label>
                             </div>
-                            <div class="form-row">
-                                <label class="cash_label" for="w2"><input class="cash_input" id="w2" type="radio" name="withdraw_type" v-model="is_login_agree"> <img style="width: 150px" src="{% static 'images/qw.png' %}" alt=""></label>
-                            </div>
-                            <div class="form-row">
-                                <label class="cash_label" for="w3"><input class="cash_input" id="w3" type="radio" name="withdraw_type" v-model="is_login_agree"> <img style="width: 150px" src="{% static 'images/wm.png' %}" alt=""></label>
-                            </div>
+
                             <div class="form-row">
                                 <label class="cash_label" for="w4"><input class="cash_input" id="w4" type="radio" name="withdraw_type" v-model="is_login_agree"> <img style="width: 150px" src="{% static 'images/we.png' %}" alt=""></label>
                             </div>

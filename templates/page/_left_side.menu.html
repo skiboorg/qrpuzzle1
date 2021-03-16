@@ -6,18 +6,33 @@
 <div class="page__left">
     <div class="logo">
         <a href="{% if request.user.is_authenticated %}{% url 'index' %}{% else %}/{% endif %}">
-            <img src="{% static 'images/logo-s.png' %}" alt="">
+            <img style="    padding-right: 15px;" src="{% static 'images/logo-s.png' %}" alt="">
         </a>
 
     </div>
     <div class="menu">
-    {% if request.user.is_authenticated %}
-                    <div style="margin-bottom: 20px;color: #ffffff">
-                        <p >Rating: <span id="rating_desktop">{{ request.user.rating }}</span></p>
-                        <p >Balance: <span id="rating_desktop">{{ request.user.balance }} QR</span></p>
+        {% if request.user.is_authenticated %}
+            <div style="margin-bottom: 20px;color: #ffffff;border: 1px solid #919191;
+box-sizing: border-box;
+border-radius: 5px; padding: 10px">
+                <div style="display: flex; justify-content: flex-start; align-items: center">
+                    <svg style="margin-right: 10px" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 4.823L7.658 7H9.632L8.043 8.134L8.694 10.241L7 8.953L5.306 10.241L5.957 8.134L4.368 7H6.342L7 4.823ZM7 0L5.306 5.6H0L4.319 8.687L2.681 14L7 10.717L11.326 14L9.681 8.687L14 5.6H8.694L7 0Z" fill="white"/>
+                        <p style="font-weight: bold; font-size: 14px">RATING: <span id="rating_desktop">{{ request.user.rating }}</span></p>
+                    </svg>
 
-                    </div>
-                {% endif %}
+                </div>
+                <div style="display: flex; justify-content: flex-start; align-items: center">
+                    <svg style="margin-right: 10px" width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.93539 9.20939V7.20125C6.93539 6.54956 7.43395 6.01969 8.04822 6.01969H12.135V4.76851C12.135 4.17512 11.7835 3.67918 11.3023 3.51734V3.51821L9.86581 3.50603L9.84841 3.45557H3.40026L3.27758 3.49733L1.0032 3.49559L0.99885 3.47732C0.44548 3.58173 0 4.08289 0 4.72762V11.6474C0 12.3713 0.563811 13.0003 1.21028 13.0003H10.9673C11.6138 13.0003 12.1358 12.4121 12.1358 11.6882V10.424H8.04909C7.43482 10.424 6.93539 9.86108 6.93539 9.20939Z" fill="white"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0328 6.96924H8.67631C8.21604 6.96924 7.84277 7.37643 7.84277 7.87847V8.58845C7.84277 9.08962 8.21604 9.49681 8.67631 9.49681H13.0328C13.4931 9.49681 13.8672 9.08962 13.8672 8.58845V7.87847C13.8672 7.37556 13.4931 6.96924 13.0328 6.96924ZM10.453 8.67024H8.65891V7.78624H10.453V8.67024Z" fill="white"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.40116 3.45508L9.17065 1.48087L9.84931 3.45508H10.9674C11.0848 3.45508 11.1962 3.48031 11.3032 3.51598L10.0947 0L0.897949 3.06354L0.999748 3.4777C1.06848 3.46465 1.13896 3.45595 1.21031 3.45595H3.40116V3.45508Z" fill="white"/>
+                    </svg>
+
+                    <p style="font-weight: bold; font-size: 14px">BALANCE: <span id="rating_desktop">{{ request.user.balance }} QR</span></p>
+                </div>
+            </div>
+        {% endif %}
         {% if isInfoPage %}
             <ul>
                 <li><a href="{% url 'index' %}" >
@@ -90,33 +105,33 @@
 
                         info
                     </a></li>
-                {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'rating' %}">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.14301 15.857H5.57001V9.43H8.14301V15.857ZM13.286 15.857H10.714V3H13.286V15.857ZM18.428 15.857H15.858V6.857H18.428V15.857Z" />
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M21 20.7139H3V18.7139H21V20.7139Z" />
-                        </svg>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'rating' %}">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.14301 15.857H5.57001V9.43H8.14301V15.857ZM13.286 15.857H10.714V3H13.286V15.857ZM18.428 15.857H15.858V6.857H18.428V15.857Z" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M21 20.7139H3V18.7139H21V20.7139Z" />
+                            </svg>
 
-                        Rating
-                    </a>
-                    </li>
+                            Rating
+                        </a>
+                        </li>
                     {% else %}
-                       <li><a href="{% url 'about' %}">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.75 11.25L11.25 15.747L3.0015 15.75C2.80311 15.7508 2.61253 15.6728 2.47161 15.5332C2.3307 15.3935 2.25099 15.2036 2.25 15.0052V2.99475C2.25 2.58375 2.58375 2.25 2.99475 2.25H15.0052C15.4163 2.25 15.75 2.592 15.75 3.0015V11.25ZM14.25 3.75H3.75V14.25H9.75V10.5C9.75002 10.3163 9.81747 10.139 9.93954 10.0017C10.0616 9.86444 10.2298 9.77674 10.4123 9.75525L10.5 9.75L14.25 9.74925V3.75ZM13.6283 11.2492L11.25 11.25V13.6268L13.6283 11.2492Z" />
-                    </svg>
-                    {% trans 'О нас' %}
-                </a>
-                    <li><a href="{% url 'rules' %}">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.75 11.25L11.25 15.747L3.0015 15.75C2.80311 15.7508 2.61253 15.6728 2.47161 15.5332C2.3307 15.3935 2.25099 15.2036 2.25 15.0052V2.99475C2.25 2.58375 2.58375 2.25 2.99475 2.25H15.0052C15.4163 2.25 15.75 2.592 15.75 3.0015V11.25ZM14.25 3.75H3.75V14.25H9.75V10.5C9.75002 10.3163 9.81747 10.139 9.93954 10.0017C10.0616 9.86444 10.2298 9.77674 10.4123 9.75525L10.5 9.75L14.25 9.74925V3.75ZM13.6283 11.2492L11.25 11.25V13.6268L13.6283 11.2492Z" />
-                    </svg>
-                    {% trans 'Правила' %}
+                        <li><a href="{% url 'about' %}">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.75 11.25L11.25 15.747L3.0015 15.75C2.80311 15.7508 2.61253 15.6728 2.47161 15.5332C2.3307 15.3935 2.25099 15.2036 2.25 15.0052V2.99475C2.25 2.58375 2.58375 2.25 2.99475 2.25H15.0052C15.4163 2.25 15.75 2.592 15.75 3.0015V11.25ZM14.25 3.75H3.75V14.25H9.75V10.5C9.75002 10.3163 9.81747 10.139 9.93954 10.0017C10.0616 9.86444 10.2298 9.77674 10.4123 9.75525L10.5 9.75L14.25 9.74925V3.75ZM13.6283 11.2492L11.25 11.25V13.6268L13.6283 11.2492Z" />
+                            </svg>
+                            {% trans 'О нас' %}
+                        </a>
+                        <li><a href="{% url 'rules' %}">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.75 11.25L11.25 15.747L3.0015 15.75C2.80311 15.7508 2.61253 15.6728 2.47161 15.5332C2.3307 15.3935 2.25099 15.2036 2.25 15.0052V2.99475C2.25 2.58375 2.58375 2.25 2.99475 2.25H15.0052C15.4163 2.25 15.75 2.592 15.75 3.0015V11.25ZM14.25 3.75H3.75V14.25H9.75V10.5C9.75002 10.3163 9.81747 10.139 9.93954 10.0017C10.0616 9.86444 10.2298 9.77674 10.4123 9.75525L10.5 9.75L14.25 9.74925V3.75ZM13.6283 11.2492L11.25 11.25V13.6268L13.6283 11.2492Z" />
+                            </svg>
+                            {% trans 'Правила' %}
 
-                </a>
-                </li>
+                        </a>
+                        </li>
 
-                </li>
+                        </li>
 
                     {% endif %}
 

@@ -14,7 +14,7 @@
             <a style="margin-right: 20px" href="{% url 'game'%}?game=qrpuzzle">
               <div class="game-select-item">
 
-                     <img style="margin-bottom: 0;" src="{% static 'images/qp_i.jpg' %}" alt="">
+                     <img style="margin-bottom: 0;" src="{% static 'images/QR-LOGO1.png' %}" alt="">
 
 
            </div>
@@ -22,16 +22,16 @@
              <a style="margin-right: 20px" href="{% url 'game'%}?game=qart">
             <div class="game-select-item">
 
-               <img style="margin-bottom: 0;"  src="{% static 'images/qa_i.png' %}" alt="">
+               <img style="margin-bottom: 0;"  src="{% static 'images/ART-LOGO.png' %}" alt="">
 
             </div>
              </a>
               <a href="{% url 'slider' %}">
             <div class="game-select-item">
                  {% if request.session.theme  == 'light' %}
-                    <img style="margin-bottom: 0;"  src="{% static 'images/slider_puzzle_logo.png' %}" alt="">
+                    <img style="margin-bottom: 0;"  src="{% static 'images/SLODER_LOGO.png' %}" alt="">
                 {% else %}
-                <img style="margin-bottom: 0;"  src="{% static 'images/slider_puzzle_logo.png' %}" alt="">
+                <img style="margin-bottom: 0;"  src="{% static 'images/SLODER_LOGO.png' %}" alt="">
                 {% endif %}
 
 
