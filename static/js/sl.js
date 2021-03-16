@@ -1,90 +1,90 @@
 
-        //========== variables
-        freader = new FileReader();
-        puzzleh = $("#puzzle-pre").height();
-        puzzlew = $("#puzzle-pre").width();
-        totalAmount = 60 *4
-        timeloop = ''
-        img = ''
+//========== variables
+freader = new FileReader();
+puzzleh = $("#puzzle-pre").height();
+puzzlew = $("#puzzle-pre").width();
+totalAmount = 60 *4
+timeloop = ''
+img = ''
 
-        //======== win time
-         function timeSet1(t) {
-                        totalAmount--;
-                        // Refresh value in localStorage
-                        localStorage.setItem('countDown', totalAmount);
+//======== win time
+function timeSet1(t) {
+    totalAmount--;
+    // Refresh value in localStorage
+    localStorage.setItem('countDown', totalAmount);
 
-                        // If countdown is over, then remove value from storage and clear timeout
-                        if (totalAmount < 0 ) {
-                            localStorage.removeItem('countDown');
-                            totalAmount = 0;
-                            concide();
-                            return;
-                        }
+    // If countdown is over, then remove value from storage and clear timeout
+    if (totalAmount < 0 ) {
+        localStorage.removeItem('countDown');
+        totalAmount = 0;
+        concide();
+        return;
+    }
 
-                        var minutes = parseInt(totalAmount/60);
-                        var seconds = parseInt(totalAmount%60);
-
-
-                        if(minutes < 10)
-                            minutes = "0"+minutes;
-
-                        if(seconds < 10)
-                            seconds = "0"+seconds;
-
-                        $('#id_timer').text(minutes + ":" + seconds);
-
-                        timeloop = setTimeout(timeSet1, 1000);
-                    }
-
-        $(document).ready(function() {
-            if (!localStorage.wintime) localStorage.wintime = 0;
-            $("#wintime").text("You Win " + localStorage.wintime + " Time");
-        });
-
-        //========== Load The Image
-        $("#inpfile").change(function() {
-            freader.readAsDataURL(this.files[0]);
-            freader.onloadend = function() {
-               // sessionStorage.imgsrc = freader.result;
-                $("#puzzle-pre")
-                    .html("")
-                    .html(
-                        '<img src="' + sessionStorage.imgsrc + '" height="100%" width="100%">'
-                    );
-            };
-        });
-
-        function slider(p,t,l) {
+    var minutes = parseInt(totalAmount/60);
+    var seconds = parseInt(totalAmount%60);
 
 
-             document.getElementById('id_concide').classList.remove('btnDisabled')
-            totalAmount = 60 *t
-            clearTimeout(timeloop)
-            start_slider(p,t,l)
+    if(minutes < 10)
+        minutes = "0"+minutes;
+
+    if(seconds < 10)
+        seconds = "0"+seconds;
+
+    $('#id_timer').text(minutes + ":" + seconds);
+
+    timeloop = setTimeout(timeSet1, 1000);
+}
+
+$(document).ready(function() {
+    if (!localStorage.wintime) localStorage.wintime = 0;
+    $("#wintime").text("You Win " + localStorage.wintime + " Time");
+});
+
+//========== Load The Image
+$("#inpfile").change(function() {
+    freader.readAsDataURL(this.files[0]);
+    freader.onloadend = function() {
+        // sessionStorage.imgsrc = freader.result;
+        $("#puzzle-pre")
+            .html("")
+            .html(
+                '<img src="' + sessionStorage.imgsrc + '" height="100%" width="100%">'
+            );
+    };
+});
+
+function slider(p,t,l) {
 
 
-        }
+    document.getElementById('id_concide').classList.remove('btnDisabled')
+    totalAmount = 60 *t
+    clearTimeout(timeloop)
+    start_slider(p,t,l)
 
-        //=========== StartGame
-        function start_slider(p,t,l) {
+
+}
+
+//=========== StartGame
+function start_slider(p,t,l) {
 
 
-            console.log('slider-start')
-               $.ajax({
-                method: "POST",
-                url: "/game/start/",
-                data: {'puzzle_length': l,'game_type':1},
-                headers: { 'X-CSRFToken':document.getElementsByName('csrfmiddlewaretoken')[0].value },
-                success: function(response) {
-                    console.log(response)
-                     app.current_game_id = response.game_id
-                    image_url = response.image
-                    console.log('image_url',image_url)
+    console.log('slider-start')
+    $.ajax({
+        method: "POST",
+        url: "/game/start/",
+        data: {'puzzle_length': l,'game_type':1},
+        headers: { 'X-CSRFToken':document.getElementsByName('csrfmiddlewaretoken')[0].value },
+        success: function(response) {
+            console.log(response)
+            app.current_game_id = response.game_id
+            image_url = response.image
+            console.log('image_url',image_url)
 
-                        //sessionStorage.imgsrc = response.image;
-                    img = response.image;
+            //sessionStorage.imgsrc = response.image;
+            img = response.image;
 
-                     //variables
+            //variables
             h = puzzleh / p;
             w = puzzlew / p;
             xpos = 0;
@@ -94,70 +94,70 @@
             $("#puzzle-cont").html("");
 
             if (p===3){
-                 for (i = 0; i < 9; i++) {
-                if (i === 3 || i === 6) {
-                    xpos = 0;
-                    ypos -= h;
+                for (i = 0; i < 9; i++) {
+                    if (i === 3 || i === 6) {
+                        xpos = 0;
+                        ypos -= h;
+                    }
+                    item = $(document.createElement("div"));
+                    $("#puzzle-cont").append(item);
+                    item
+                        .css({
+                            height: h,
+                            width: w,
+                            "background-image": "url(" + img + ")",
+                            "background-size": puzzlew + "px" + " " + puzzleh + "px",
+                            "background-position": xpos + "px" + " " + ypos + "px"
+                        })
+                        .attr("class", "puzzle-piece")
+                        .attr("id", "puzzle-p")
+                        .attr("value", i);
+                    xpos -= w;
                 }
-                item = $(document.createElement("div"));
-                $("#puzzle-cont").append(item);
-                item
-                    .css({
-                        height: h,
-                        width: w,
-                        "background-image": "url(" + img + ")",
-                        "background-size": puzzlew + "px" + " " + puzzleh + "px",
-                        "background-position": xpos + "px" + " " + ypos + "px"
-                    })
-                    .attr("class", "puzzle-piece")
-                    .attr("id", "puzzle-p")
-                    .attr("value", i);
-                xpos -= w;
-            }
             }
             if (p===4){
-                 for (i = 0; i < 16; i++) {
-                if (i === 4 || i === 8 || i === 12 ) {
-                    xpos = 0;
-                    ypos -= h;
+                for (i = 0; i < 16; i++) {
+                    if (i === 4 || i === 8 || i === 12 ) {
+                        xpos = 0;
+                        ypos -= h;
+                    }
+                    item = $(document.createElement("div"));
+                    $("#puzzle-cont").append(item);
+                    item
+                        .css({
+                            height: h,
+                            width: w,
+                            "background-image": "url(" + img + ")",
+                            "background-size": puzzlew + "px" + " " + puzzleh + "px",
+                            "background-position": xpos + "px" + " " + ypos + "px"
+                        })
+                        .attr("class", "puzzle-piece")
+                        .attr("id", "puzzle-p")
+                        .attr("value", i);
+                    xpos -= w;
                 }
-                item = $(document.createElement("div"));
-                $("#puzzle-cont").append(item);
-                item
-                    .css({
-                        height: h,
-                        width: w,
-                        "background-image": "url(" + img + ")",
-                        "background-size": puzzlew + "px" + " " + puzzleh + "px",
-                        "background-position": xpos + "px" + " " + ypos + "px"
-                    })
-                    .attr("class", "puzzle-piece")
-                    .attr("id", "puzzle-p")
-                    .attr("value", i);
-                xpos -= w;
-            }
             }
             if (p===5){
-                 for (i = 0; i < 25; i++) {
-                if (i === 5 || i === 10 || i === 15 || i === 20) {
-                    xpos = 0;
-                    ypos -= h;
+                for (i = 0; i < 25; i++) {
+                    if (i === 5 || i === 10 || i === 15 || i === 20) {
+                        xpos = 0;
+                        ypos -= h;
+                    }
+                    item = $(document.createElement("div"));
+                    $("#puzzle-cont").append(item);
+                    item
+                        .css({
+                            height: h,
+                            width: w,
+                            "background-image": "url(" + img + ")",
+                            "background-size": puzzlew + "px" + " " + puzzleh + "px",
+                            "background-position": xpos + "px" + " " + ypos + "px"
+                        })
+                        .attr("class", "puzzle-piece")
+                        .attr("id", "puzzle-p")
+                        .attr("value", i);
+                    xpos -= w;
                 }
-                item = $(document.createElement("div"));
-                $("#puzzle-cont").append(item);
-                item
-                    .css({
-                        height: h,
-                        width: w,
-                        "background-image": "url(" + img + ")",
-                        "background-size": puzzlew + "px" + " " + puzzleh + "px",
-                        "background-position": xpos + "px" + " " + ypos + "px"
-                    })
-                    .attr("class", "puzzle-piece")
-                    .attr("id", "puzzle-p")
-                    .attr("value", i);
-                xpos -= w;
-            }
             }
 
 
@@ -202,12 +202,17 @@
                     }).then(res=>res.json())
                         .then(res => {
                             clearTimeout(timeloop)
-                             app.result_title = 'YOU WIN'
-                                app.result = true
+                            app.result_title = 'YOU WIN'
+                            app.result = true
                             app.result_image_modal = true
                             app.result_image = image_url
+                            setInterval(() => app.counter--, 1000);
+
+                            setTimeout( function (){
+                                app.showClose = true
+                            }, 20000);
                             console.log(res)
-                           // document.getElementsByClassName('win-label')[0].classList.add('winLabelActive')
+                            // document.getElementsByClassName('win-label')[0].classList.add('winLabelActive')
                             document.getElementById('rating_desktop').innerText = res['rating']
 
                         })
@@ -246,8 +251,8 @@
 
 
 
-                }
-            })
+        }
+    })
 
-        };
+};
 

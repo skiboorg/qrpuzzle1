@@ -436,7 +436,13 @@ var jQuery = window.jQuery || require('jquery');
             app.result_title = 'YOU WIN'
             app.result = true
                             app.result_image_modal = true
+
                             app.result_image = image_url
+          setInterval(() => app.counter--, 1000);
+
+    setTimeout( function (){
+      app.showClose = true
+    }, 20000);
            $('.puzzle-group').remove() // for bug sometimes game not ended
           $('.img_end').remove() // remove concide image
           $('#concide_image').remove() // remove concide image div
